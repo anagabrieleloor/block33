@@ -21,7 +21,7 @@ const swipes = [
     {user1: 1, user2: 2, isLike: true, isPass: false},
     {user1: 2, user2: 1, isLike: true, isPass: false},
     {user1: 5, user2: 2, isLike: false, isPass: true},
-    {user1: 4, user2: 3, isLike: false, isPass: true},
+    {user1: 4, user2: 3, isLike: false, isPass: true}
 ]
 
 //messages
@@ -31,3 +31,5 @@ const messages = [
     {senderId: 1, receiverId: 5, message:"hola bb"  },
     {senderId: 1, receiverId: 2, message:"q mas pues"  }
 ]
+
+module.exports = { users, swipes, messages };
