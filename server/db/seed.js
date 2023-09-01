@@ -30,30 +30,30 @@ const createTables = async () => {
     console.log("building tables...")
     await client.query(`
         CREATE TABLE users (
-            "userId" SERIAL PRIMARY KEY,
+            user_id SERIAL PRIMARY KEY,
             username varchar(32) UNIQUE NOT NULL,
             password varchar(32) NOT NULL,
-            firstName varchar(32) NOT NULL,
-            lastName varchar(32) NOT NULL,
+            first_name varchar(32) NOT NULL,
+            last_name varchar(32) NOT NULL,
             gender gender_enum NOT NULL,
             location varchar(32) NOT NULL,
             education varchar(255),
             work varchar(255),
             photos varchar(8000) NOT NULL,
-            aboutMe varchar(500),
+            about_me varchar(500),
             song varchar(8000)
         );
         CREATE TABLE swipes (
-            "swipeId" SERIAL PRIMARY KEY,
-            "user1" INTEGER REFERENCES users("userId"),
-            "user2" INTEGER REFERENCES users("userId"),
-            isLike BOOLEAN,
-            isPass BOOLEAN
+            swipe_id SERIAL PRIMARY KEY,
+            user1 INTEGER REFERENCES users(user_id),
+            user2 INTEGER REFERENCES users(user_id),
+            is_like BOOLEAN,
+            is_pass BOOLEAN
         );
         CREATE TABLE messages (
-            "messagesId" SERIAL PRIMARY KEY,
-            "senderId" INTEGER REFERENCES users("userId"),
-            "receiverId" INTEGER REFERENCES users("userId"),
+            messages_id SERIAL PRIMARY KEY,
+            sender_id INTEGER REFERENCES users(user_id),
+            receiver_id INTEGER REFERENCES users(user_id),
             message_content varchar(500)
         );
     `)

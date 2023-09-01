@@ -1,6 +1,6 @@
 const client = require('../client')
 
-const createSwipe = async ({ user1, user2, isLike, isPass }) => {
+const createSwipe = async ({ user1, user2, is_like, is_pass }) => {
     try {
         const {
             rows: [swipe],
@@ -10,12 +10,12 @@ const createSwipe = async ({ user1, user2, isLike, isPass }) => {
             //VALUES (var1, etc)
             //RETURNING everything
             `
-                INSERT INTO swipes(user1, user2, isLike, isPass)
+                INSERT INTO swipes(user1, user2, is_like, is_pass)
                 VALUES($1, $2, $3, $4)
                 RETURNING *;
             `,
             //hook parameteres to variables
-            [user1, user2, isLike, isPass]
+            [user1, user2, is_like, is_pass]
         )
         return swipe
     } catch (error) {

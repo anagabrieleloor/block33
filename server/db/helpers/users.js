@@ -1,6 +1,8 @@
 const client = require('../client')
 
-const createUser = async ({ username, password, firstName, lastName, gender, location, education, work, photos, aboutMe, song }) => {
+
+//POST - /api/users
+const createUser = async ({ username, password, first_name, last_name, gender, location, education, work, photos, about_me, song }) => {
     try {
         const {
             rows: [user],
@@ -10,12 +12,12 @@ const createUser = async ({ username, password, firstName, lastName, gender, loc
             //VALUES (var1, etc)
             //RETURNING everything
             `
-                INSERT INTO users(username, password, firstName, lastName, gender, location, education, work, photos, aboutMe, song)
+                INSERT INTO users(username, password, first_name, last_name, gender, location, education, work, photos, about_me, song)
                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
                 RETURNING *;
             `,
             //hook parameteres to variables
-            [username, password, firstName, lastName, gender, location, education, work, photos, aboutMe, song]
+            [username, password, first_name, last_name, gender, location, education, work, photos, about_me, song]
         )
         return user
     } catch (error) {
@@ -23,9 +25,10 @@ const createUser = async ({ username, password, firstName, lastName, gender, loc
     }
 }
 
+//GET - /api/users - get all users
 const getAllUsers = async () => {
     try {
-        const { row }
+        const {rows}
         = await client.query(`
             SELECT *
             FROM users;
@@ -36,4 +39,21 @@ const getAllUsers = async () => {
     }
 }
 
-module.exports = { createUser, getAllUsers }
+//GET - /api/users/:user_id
+const getUserById = async (user_id) => {
+    try {
+        const { rows: [user] }
+        = await client.query(`
+        SELECT * 
+        FROM users
+        WHERE user_id = $1 ;
+        `[user_id]);
+         return user;
+        } catch (error) {
+         throw error;
+    }
+}
+
+
+
+module.exports = { createUser, getAllUsers, getUserById }

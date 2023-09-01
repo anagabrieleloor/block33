@@ -1,6 +1,6 @@
 const client = require('../client')
 
-const createMessage = async ({ senderId, receiverId, message_content }) => {
+const createMessage = async ({ sender_id, receiver_id, message_content }) => {
     try {
         const {
             rows: [message],
@@ -10,12 +10,12 @@ const createMessage = async ({ senderId, receiverId, message_content }) => {
             //VALUES (var1, etc)
             //RETURNING everything
             `
-                INSERT INTO messages("senderId", "receiverId", message_content)
+                INSERT INTO messages(sender_id, receiver_id, message_content)
                 VALUES($1, $2, $3)
                 RETURNING *;
             `,
             //hook parameteres to variables
-            [senderId, receiverId, message_content]
+            [sender_id, receiver_id, message_content]
         )
         return message
     } catch (error) {
