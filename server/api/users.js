@@ -26,6 +26,36 @@ router.get('/:user_id', async (req, res, next) => {
     }
 });
 
+//POST - /api/users - create new user
+router.post('/', async (req, res, next) => {
+    try{
+        const user = await createUser(req.body);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// PUT - /api/users/:user_id - update user
+router.put('/:user_id', async (req, res, next) => {
+    try{
+        const user = await updateUser(req.params.user_id, req.body);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// DELETE - /api/users/:user_id - delete user
+router.delete('/:user_id', async (req, res, next) => {
+    try{
+        const user = await deleteUser(req.params.user_id);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 
 module.exports = router;

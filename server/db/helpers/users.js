@@ -42,17 +42,32 @@ const getAllUsers = async () => {
 //GET - /api/users/:user_id
 const getUserById = async (user_id) => {
     try {
-        const { rows: [user] }
+        const { rows: [user], }
         = await client.query(`
         SELECT * 
         FROM users
-        WHERE user_id = $1 ;
-        `[user_id]);
+        WHERE user_id = ${user_id};
+        `);
          return user;
         } catch (error) {
          throw error;
     }
 }
+
+// PUT - /api/users/:user_id - update a user
+// const updateUser = async (user_id) => {
+//     try {
+//         const { rows: [user], }
+//         = await client.query(`
+//         SELECT * 
+//         FROM users
+//         WHERE user_id = ${user_id};
+//         `);
+//          return user;
+//         } catch (error) {
+//          throw error;
+//     }
+// }
 
 
 
