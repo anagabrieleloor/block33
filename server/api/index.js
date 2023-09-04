@@ -11,5 +11,12 @@ router.get('/health', (req, res, next) => {
 //ROUTER: /api/users
 router.use('/users', require('./users'));
 
+
+//ROUTER: /api/messages
+router.use('/messages', require('./messages'));
+
+//ROUTER: /api/swipes
+router.use('/swipes', require('./swipes'))
+
 module.exports = router;
 

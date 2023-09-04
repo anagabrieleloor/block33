@@ -54,21 +54,35 @@ const getUserById = async (user_id) => {
     }
 }
 
+
 // PUT - /api/users/:user_id - update a user
-// const updateUser = async (user_id) => {
-//     try {
-//         const { rows: [user], }
-//         = await client.query(`
-//         SELECT * 
-//         FROM users
-//         WHERE user_id = ${user_id};
-//         `);
-//          return user;
-//         } catch (error) {
-//          throw error;
-//     }
-// }
+const updateUser = async (user_id, updatedUserData) => {
+    try {
+        const { rows: [user], }
+        = await client.query(`
+        UPDATE users 
+        SET 
+        username = $1, 
+        password = $2, 
+        first_name = $3, 
+        last_name = $4, 
+        gender = $5, 
+        location = $6, 
+        education = $7, 
+        work = $8, 
+        photos = $9, 
+        about_me = $10, 
+        song = $11
+        WHERE user_id = ${user_id}
+        RETURNING *;
+        `
+        );
+         return user;
+        } catch (error) {
+         throw error;
+    }
+}
 
 
 
-module.exports = { createUser, getAllUsers, getUserById }
+module.exports = { createUser, getAllUsers, getUserById, updateUser }

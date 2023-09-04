@@ -25,7 +25,7 @@ const createSwipe = async ({ user1, user2, is_like, is_pass }) => {
 
 const getAllSwipes = async () => {
     try {
-        const { row }
+        const {rows}
         = await client.query(`
             SELECT *
             FROM swipes;
@@ -36,4 +36,19 @@ const getAllSwipes = async () => {
     }
 }
 
-module.exports = { createSwipe, getAllSwipes }
+//GET - /api/swipes/:swipe_id
+const getSwipeById = async (swipe_id) => {
+    try {
+        const { rows: [swipe], }
+        = await client.query(`
+        SELECT * 
+        FROM swipes
+        WHERE swipe_id = ${swipe_id};
+        `);
+         return swipe;
+        } catch (error) {
+         throw error;
+    }
+}
+
+module.exports = { createSwipe, getAllSwipes, getSwipeById }

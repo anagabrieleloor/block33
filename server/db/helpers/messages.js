@@ -23,9 +23,10 @@ const createMessage = async ({ sender_id, receiver_id, message_content }) => {
     }
 }
 
+//GET - /api/messages - get all messages
 const getAllMessages = async () => {
     try {
-        const { row }
+        const { rows }
         = await client.query(`
             SELECT *
             FROM messages;
@@ -36,4 +37,20 @@ const getAllMessages = async () => {
     }
 }
 
-module.exports = { createMessage, getAllMessages }
+//GET - /api/messages/:message_id - get message by id
+const getMessageById = async (messages_id) => {
+    try {
+        const { rows: [message], }
+        = await client.query(`
+        SELECT * 
+        FROM messages
+        WHERE message_id = ${message_id};
+        `);
+         return message;
+        } catch (error) {
+         throw error;
+    }
+}
+
+
+module.exports = { createMessage, getAllMessages, getMessageById }

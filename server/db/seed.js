@@ -51,7 +51,7 @@ const createTables = async () => {
             is_pass BOOLEAN
         );
         CREATE TABLE messages (
-            messages_id SERIAL PRIMARY KEY,
+            message_id SERIAL PRIMARY KEY,
             sender_id INTEGER REFERENCES users(user_id),
             receiver_id INTEGER REFERENCES users(user_id),
             message_content varchar(500)
