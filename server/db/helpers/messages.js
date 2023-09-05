@@ -38,7 +38,7 @@ const getAllMessages = async () => {
 }
 
 //GET - /api/messages/:message_id - get message by id
-const getMessageById = async (messages_id) => {
+const getMessageById = async (message_id) => {
     try {
         const { rows: [message], }
         = await client.query(`
@@ -52,5 +52,19 @@ const getMessageById = async (messages_id) => {
     }
 }
 
+//DELETE - /api/messages/:message_id - delete message
+const deleteMessage = async (message_id) => {
+    try {
+        const { rows: [message], } = await client.query(`
+        DELETE 
+        FROM messages
+        WHERE message_id = ${message_id};
+        `);
+        return message;
+    } catch (error) {
+        throw error;
+    }
+}
 
-module.exports = { createMessage, getAllMessages, getMessageById }
+
+module.exports = { createMessage, getAllMessages, getMessageById, deleteMessage }

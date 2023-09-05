@@ -96,7 +96,7 @@ const updateUser = async (user_id, updatedUserData) => {
     }
 }
 
-//DELETE - /api/users/:user_id
+//DELETE - /api/users/:user_id - delete user 
 const deleteUser = async (user_id) => {
     try {
         const { rows: [user], }

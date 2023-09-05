@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createMessage, getAllMessages, getMessageById } = require('../db/helpers/messages');
+const { createMessage, getAllMessages, getMessageById, deleteMessage } = require('../db/helpers/messages');
 
 
 //GET - api/messages - get all messages
@@ -30,6 +30,16 @@ router.get('/:message_id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try{
         const message = await createMessage(req.body);
+        res.send(message);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//DELETE - /api/messages:message_id - delete message
+router.delete('/:message_id', async (req, res, next) => {
+    try{
+        const message = await deleteMessage(req.params.message_id);
         res.send(message);
     } catch (error) {
         next(error);
