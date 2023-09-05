@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
 // PUT - /api/users/:user_id - update user
 router.put('/:user_id', async (req, res, next) => {
     try{
-        const user = await updateUser(req.params.user_id);
+        const user = await updateUser(req.params.user_id, req.body);
         res.send(user);
     } catch (error) {
         next(error);

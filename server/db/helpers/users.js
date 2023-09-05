@@ -75,7 +75,21 @@ const updateUser = async (user_id, updatedUserData) => {
         song = $11
         WHERE user_id = ${user_id}
         RETURNING *;
-        `
+        `,
+        [
+            updatedUserData.username,
+            updatedUserData.password,
+            updatedUserData.first_name,
+            updatedUserData.last_name,
+            updatedUserData.gender,
+            updatedUserData.location,
+            updatedUserData.education,
+            updatedUserData.work,
+            updatedUserData.photos,
+            updatedUserData.about_me,
+            updatedUserData.song
+             
+        ]
         );
          return user;
         } catch (error) {
