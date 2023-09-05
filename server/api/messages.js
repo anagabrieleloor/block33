@@ -6,8 +6,7 @@ const { createMessage, getAllMessages, getMessageById, deleteMessage } = require
 
 //GET - api/messages - get all messages
 router.get('/', async (req, res, next) => {
-    try {
-        
+    try { 
         const messages = await getAllMessages();
         res.send(messages);
     } catch (error) {
@@ -17,8 +16,7 @@ router.get('/', async (req, res, next) => {
 
 // GET - /api/messages/:message_id - get message by id
 router.get('/:message_id', async (req, res, next) => {
-    try {
-        
+    try {     
         const message = await getMessageById(req.params.message_id);
         res.send(message);
     } catch (error) {
@@ -28,7 +26,7 @@ router.get('/:message_id', async (req, res, next) => {
 
 //POST - /api/messages - create new message
 router.post('/', async (req, res, next) => {
-    try{
+    try {
         const message = await createMessage(req.body);
         res.send(message);
     } catch (error) {
@@ -38,7 +36,7 @@ router.post('/', async (req, res, next) => {
 
 //DELETE - /api/messages:message_id - delete message
 router.delete('/:message_id', async (req, res, next) => {
-    try{
+    try {
         const message = await deleteMessage(req.params.message_id);
         res.send(message);
     } catch (error) {

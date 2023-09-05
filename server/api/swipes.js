@@ -6,8 +6,7 @@ const { createSwipe, getAllSwipes, getSwipeById } = require('../db/helpers/swipe
 
 //GET - api/swipes - get all swipes
 router.get('/', async (req, res, next) => {
-    try {
-        
+    try{  
         const swipes = await getAllSwipes();
         res.send(swipes);
     } catch (error) {
@@ -17,8 +16,7 @@ router.get('/', async (req, res, next) => {
 
 // GET - /api/swipes/:swipe_id - get swipe by id
 router.get('/:swipe_id', async (req, res, next) => {
-    try {
-        
+    try{   
         const swipe = await getSwipeById(req.params.swipe_id);
         res.send(swipe);
     } catch (error) {

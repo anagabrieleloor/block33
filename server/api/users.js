@@ -6,8 +6,7 @@ const { createUser, getAllUsers, getUserById, updateUser, deleteUser } = require
 
 //GET - /api/users - get all users
 router.get('/', async (req, res, next) => {
-    try {
-        
+    try{     
         const users = await getAllUsers();
         res.send(users);
     } catch (error) {
@@ -17,8 +16,7 @@ router.get('/', async (req, res, next) => {
 
 // GET - /api/users/:user_id - get user by id
 router.get('/:user_id', async (req, res, next) => {
-    try {
-        
+    try{      
         const user = await getUserById(req.params.user_id);
         res.send(user);
     } catch (error) {
@@ -56,6 +54,7 @@ router.delete('/:user_id', async (req, res, next) => {
     }
 });
 
+//GET - api/users/:user_id/matches - get user matches?
 
 
 module.exports = router;
