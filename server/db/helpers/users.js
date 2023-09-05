@@ -87,8 +87,7 @@ const updateUser = async (user_id, updatedUserData) => {
             updatedUserData.work,
             updatedUserData.photos,
             updatedUserData.about_me,
-            updatedUserData.song
-             
+            updatedUserData.song             
         ]
         );
          return user;
@@ -97,6 +96,21 @@ const updateUser = async (user_id, updatedUserData) => {
     }
 }
 
+//DELETE - /api/users/:user_id
+const deleteUser = async (user_id) => {
+    try {
+        const { rows: [user], }
+        = await client.query(`
+        DELETE 
+        FROM users
+        WHERE user_id = ${user_id};
+        `);
+         return user;
+        } catch (error) {
+         throw error;
+    }
+}
 
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser }
+
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser }

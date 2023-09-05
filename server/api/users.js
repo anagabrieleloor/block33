@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createUser, getAllUsers, getUserById, updateUser } = require('../db/helpers/users');
+const { createUser, getAllUsers, getUserById, updateUser, deleteUser } = require('../db/helpers/users');
 
 
 //GET - /api/users - get all users
