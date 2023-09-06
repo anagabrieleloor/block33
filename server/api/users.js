@@ -63,4 +63,19 @@ router.get('/:user_id/matches', async (req, res, next) => {
     }
 });
 
+
+//POST - /api/users/login - login 
+// POST - /api/users/login - login
+router.post('/login', async (req, res, next) => {
+    try {
+        const { username, password } = req.body; // Get username and password from the request body
+        const user = await loginUser(username, password);
+
+        // Assuming loginUser throws an error if the login fails
+        res.json({ message: 'yayyy ur logged in', user });
+    } catch (error) {
+        next(error); // Pass the error to the error-handling middleware
+    }
+});
+
 module.exports = router;

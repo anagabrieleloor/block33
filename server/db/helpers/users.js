@@ -129,6 +129,28 @@ const getUserMatches = async (user_id) => {
     }
 }
 
+//POST - api/users/login - login 
+const loginUser = async (username, password) => {
+    try {
+        const {
+            rows: [user],
+        } = await client.query(
+            `
+            SELECT * 
+            FROM users 
+            WHERE username = ${username}
+            AND password = ${password};
+            `,
+            [username, password]
+        );
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+
 
 
 module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches }
