@@ -13,6 +13,7 @@ return (
         <Link to ="/">Home</Link>
         <Link to ="/user">my profile</Link>
         <Link to ="/users">users</Link>
+        <Link to ="/messages">messages</Link>
         </div>
         
     </div>

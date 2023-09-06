@@ -1,11 +1,10 @@
 import { useState } from "react";
-// import Authenticate from "./Authenticate";
 import { useNavigate } from "react-router-dom";
 import { login } from "../API";
 
 
 
-export default function Login({ token, setToken }) {
+export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,18 +13,11 @@ export default function Login({ token, setToken }) {
     event.preventDefault();
     try {
       const response = await login(username, password);
-  
-      if (response && response.success) {
-        setToken(response.data.token);
-        console.log(response.data.message);
+        console.log("ur in!!!!", response);
         navigate("/users");
-      } else if (response && response.error) {
-        console.error(response.error);
-      } else {
-        console.error("Unexpected response from the server");
-      }
+
     } catch (err) {
-      console.error(err);
+      console.error("try again bb", err);
     }
   }
   

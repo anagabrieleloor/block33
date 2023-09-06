@@ -153,4 +153,4 @@ const loginUser = async (username, password) => {
 
 
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches }
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser }

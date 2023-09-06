@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches } = require('../db/helpers/users');
+const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser } = require('../db/helpers/users');
 
 
 //GET - /api/users - get all users
@@ -64,17 +64,15 @@ router.get('/:user_id/matches', async (req, res, next) => {
 });
 
 
-//POST - /api/users/login - login 
+
 // POST - /api/users/login - login
 router.post('/login', async (req, res, next) => {
     try {
-        const { username, password } = req.body; // Get username and password from the request body
-        const user = await loginUser(username, password);
-
-        // Assuming loginUser throws an error if the login fails
+        const { username, password } = req.body; 
+        const user = await loginUser(username, password);      
         res.json({ message: 'yayyy ur logged in', user });
     } catch (error) {
-        next(error); // Pass the error to the error-handling middleware
+        next(error); 
     }
 });
 
