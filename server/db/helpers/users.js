@@ -132,14 +132,15 @@ const getUserMatches = async (user_id) => {
 //POST - api/users/login - login 
 const loginUser = async (username, password) => {
     try {
+        console.log(username, password);
         const {
             rows: [user],
         } = await client.query(
             `
             SELECT * 
             FROM users 
-            WHERE username = ${username}
-            AND password = ${password};
+            WHERE username = $1
+            AND password = $2;
             `,
             [username, password]
         );

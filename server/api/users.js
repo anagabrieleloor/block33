@@ -69,6 +69,7 @@ router.get('/:user_id/matches', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body; 
+        console.log("this is the body", req);
         const user = await loginUser(username, password);      
         res.json({ message: 'yayyy ur logged in', user });
     } catch (error) {
