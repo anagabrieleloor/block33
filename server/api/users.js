@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser } = require('../db/helpers/users');
+const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser } = require('../db/helpers/users');
 
 
 //GET - /api/users - get all users
@@ -77,10 +77,10 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-//GET - api/users/:session_id - current user profile 
-router.get('/users/me', async (req, res, next) => {
+//GET - api/users/:user_id - current user profile 
+router.get('/users/:user_id', async (req, res, next) => {
     try{
-        const user = await currentUser(req.params.session_id);
+        const user = await currentUser(req.params.user_id);
         res.send(user);
     } catch (error) {
         next(error);

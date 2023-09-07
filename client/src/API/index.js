@@ -12,9 +12,9 @@ export async function fetchUsers() {
     }
 }
 
-export async function fetchSingleUser(session_id) {
+export async function fetchSingleUser(user_id) {
     try {
-        const response = await fetch(`${BASE_URL}/users/${session_id}`);
+        const response = await fetch(`${BASE_URL}/users/${user_id}`);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -68,9 +68,9 @@ export async function login(username, password) {
 }
 }
 
-export async function fetchUserProfile() {
+export async function fetchUserProfile(user_id) {
     try {
-      const response = await fetch(`${BASE_URL}/users/${session_id}`, {
+      const response = await fetch(`${BASE_URL}/users/${user_id}`, {
         headers: {
           'Content-Type': 'application/json',
         

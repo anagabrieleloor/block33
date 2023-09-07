@@ -23,7 +23,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/messages" element={<AllMessages />} />
-      <Route path="/users/:session_id" element={<MyProfile />} />
+      <Route path="/users/:user_id" element={<MyProfile />} />
       <Route path="/swipes" element={<Swipe />} />
       <Route path='/users/signup' element={<Register />} />
       <Route path='/users/:user_id/matches' element={<Matches />} />

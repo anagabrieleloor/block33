@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../API";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
     const [username, setUsername] = useState("");
@@ -33,7 +34,7 @@ export default function SignUp() {
     }
 
     return (
-        <div>
+        <div className="login-card">
             <form onSubmit={handleSubmit}>
                 <h3>sign up</h3>
                 <label>Username:</label>
@@ -105,8 +106,12 @@ export default function SignUp() {
                     onChange={(e) => setSong(e.target.value)}
                 />
                 <br /> */}
-                <button type="submit">Submit</button>
+                <button className="btn draw-border" type="submit">Submit</button>
+                
             </form>
+            <Link to ="/">back to login</Link>
         </div>
+        
     );
+    
 }

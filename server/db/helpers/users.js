@@ -151,7 +151,7 @@ const loginUser = async (username, password) => {
 };
 
 //GET - api/users/:session_id - current user profile 
-const currentUser = async (session_id) => {
+const currentUser = async (user_id) => {
     try {
         const {
             rows: [user],
@@ -159,13 +159,9 @@ const currentUser = async (session_id) => {
             `
             SELECT *
             FROM users
-            WHERE user_id = (
-                SELECT user_id
-                FROM sessions
-                WHERE session_id = $1
-            );
+            WHERE user_id = $1;
             `,
-            [session_id]
+            [user_id]
         );
         return user;
     } catch (error) {
@@ -177,4 +173,4 @@ const currentUser = async (session_id) => {
 
 
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser }
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser }

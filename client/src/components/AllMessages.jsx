@@ -35,7 +35,7 @@ export default function AllMessages() {
             <img src={message.sender_id.photos} id="message-profile-image" />
           </p>
           <p>message: {message.message_content}</p>
-          <hr></hr>
+          <hr className="rounded" />
         </div>
       ))}
     </div>

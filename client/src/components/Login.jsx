@@ -23,7 +23,7 @@ export default function Login() {
   
 
   return (
-    <div id="login">
+    <div className="login-card">
       <form onSubmit={loginUser}>
         <h3>log in</h3>
         <label>Username:</label>
@@ -40,7 +40,7 @@ export default function Login() {
                 />
                 <br />
         <div>
-          <button type="submit">Submit</button>
+          <button className="btn draw-border" type="submit">Submit</button>
         </div>
       </form>
       <div>

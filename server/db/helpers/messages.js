@@ -37,6 +37,8 @@ const getAllMessages = async () => {
     }
 }
 
+
+
 //GET - /api/messages/:message_id - get message by id
 const getMessageById = async (message_id) => {
     try {

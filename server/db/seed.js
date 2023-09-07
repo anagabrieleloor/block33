@@ -55,8 +55,7 @@ const createTables = async () => {
             sender_id INTEGER REFERENCES users(user_id),
             receiver_id INTEGER REFERENCES users(user_id),
             message_content varchar(500),
-            sender_username varchar(32) REFERENCES users(username) 
-            
+            sender_username varchar(32) REFERENCES users(username)
         );
     `)
     console.log("tables built!")
