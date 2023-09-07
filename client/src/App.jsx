@@ -7,9 +7,14 @@ import AllMessages from "./components/AllMessages";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AllUserProfiles from "./components/AllUserProfiles";
+import MyProfile from "./components/MyProfile";
+import Swipe from "./components/Swipe";
+import Register from "./components/Register";
+import Matches from "./components/Matches";
 
 
 function App() {
+  
 
   return (
     <div className="App">
@@ -18,7 +23,11 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/messages" element={<AllMessages />} />
-        {/* <Route path="/user" element={<UserProfile />} /> */}
+      <Route path="/users/:session_id" element={<MyProfile />} />
+      <Route path="/swipes" element={<Swipe />} />
+      <Route path='/users/signup' element={<Register />} />
+      <Route path='/users/:user_id/matches' element={<Matches />} />
+       
 
       </Routes>
     </div>
@@ -32,7 +41,8 @@ function Home() {
       <h2>&hearts; welcome &hearts;</h2>
       {/* <Register /> */}
       <Login token={token} setToken={setToken} />
-      {/* <Link to ="/signup">new? sign up</Link> */}
+      <Link to ="/users/signup">new? sign up</Link>
+      {/* <Register /> */}
       
     </div>
   )

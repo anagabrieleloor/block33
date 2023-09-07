@@ -24,15 +24,18 @@ export default function AllMessages() {
 
 
   return (
-    <div>
+    <div className="message-card">
+      <h3>messages:</h3>
       {messages.map((message) => ( 
         
         <div key={message.message_id}>
+          
           <h4>{message.sender_id}</h4>
           <p>
             <img src={message.sender_id.photos} id="message-profile-image" />
           </p>
           <p>message: {message.message_content}</p>
+          <hr></hr>
         </div>
       ))}
     </div>

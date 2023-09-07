@@ -25,7 +25,7 @@ router.get('/:user_id', async (req, res, next) => {
 });
 
 //POST - /api/users - create new user
-router.post('/', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
     try{
         const user = await createUser(req.body);
         res.send(user);
@@ -74,6 +74,16 @@ router.post('/login', async (req, res, next) => {
         res.json({ message: 'yayyy ur logged in', user });
     } catch (error) {
         next(error); 
+    }
+});
+
+//GET - api/users/:session_id - current user profile 
+router.get('/users/me', async (req, res, next) => {
+    try{
+        const user = await currentUser(req.params.session_id);
+        res.send(user);
+    } catch (error) {
+        next(error);
     }
 });
 

@@ -53,7 +53,7 @@ export default function AllUserProfiles() {
 return (
   <div className="container">
     {users.map((user) => ( 
-      <div className="card" key={user.id}> {/* Note the added key prop */}
+      <div className="card" key={user.user_id}> 
         <img src={user.photos} alt={`${user.first_name}'s Profile`} id="user-profile-image" />
         <p className="card__name">{user.first_name}</p>
         <div className="grid-container">

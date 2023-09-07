@@ -150,6 +150,29 @@ const loginUser = async (username, password) => {
     }
 };
 
+//GET - api/users/:session_id - current user profile 
+const currentUser = async (session_id) => {
+    try {
+        const {
+            rows: [user],
+        } = await client.query(
+            `
+            SELECT *
+            FROM users
+            WHERE user_id = (
+                SELECT user_id
+                FROM sessions
+                WHERE session_id = $1
+            );
+            `,
+            [session_id]
+        );
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 
 

@@ -12,15 +12,15 @@ export async function fetchUsers() {
     }
 }
 
-// export async function fetchSingleUser(user_id) {
-//     try {
-//         const response = await fetch(`${BASE_URL}/users/${user_id}`);
-//         const result = await response.json();
-//         return result;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
+export async function fetchSingleUser(session_id) {
+    try {
+        const response = await fetch(`${BASE_URL}/users/${session_id}`);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 export async function login(username, password) {
     try {
@@ -44,9 +44,33 @@ export async function login(username, password) {
     }
 }
 
+  export async function registerUser(username, password,) {
+    try {
+  const response = await fetch(
+    `${BASE_URL}/users/signup`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user: {
+        username: username,
+        password: password
+      },
+    })
+  });
+  const result = await response.json();
+
+  console.log(result)
+  return result
+} catch (error) {
+  console.error(error);
+}
+}
+
 export async function fetchUserProfile() {
     try {
-      const response = await fetch(`${BASE_URL}/users/me`, {
+      const response = await fetch(`${BASE_URL}/users/${session_id}`, {
         headers: {
           'Content-Type': 'application/json',
         
@@ -65,4 +89,17 @@ export async function fetchUserProfile() {
       throw err;
     }
   }
+
+
   
+export async function fetchMatches(user_id) {
+    try {
+        const response = await fetch(`${BASE_URL}/users/${user_id}/matches`);
+        const result = await response.json();
+        console.log(result);
+        return result
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
