@@ -14,7 +14,7 @@ export default function Login() {
     try {
       const response = await login(username, password);
         console.log("ur in!!!!", response);
-        navigate("/users");
+        navigate("/users/me/:user_id");
 
     } catch (err) {
       console.error("try again bb", err);
@@ -26,13 +26,13 @@ export default function Login() {
     <div className="login-card">
       <form onSubmit={loginUser}>
         <h3>log in</h3>
-        <label>Username:</label>
+        <label>username:</label>
                 <input
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <br />
-                <label>Password:</label>
+                <label>password:</label>
                 <input
                     type="password"
                     value={password}

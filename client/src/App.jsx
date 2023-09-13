@@ -11,6 +11,12 @@ import MyProfile from "./components/MyProfile";
 import Swipe from "./components/Swipe";
 import Register from "./components/Register";
 import Matches from "./components/Matches";
+import EditProfile from "./components/EditProfile";
+import NewMessage from "./components/NewMessage";
+import DeleteMessage from "./components/DeleteMessage";
+import EditMessage from "./components/EditMessage";
+import SingleProfile from "./components/SingleProfile";
+import MessageThread from "./components/MessageThread";
 
 
 function App() {
@@ -23,10 +29,17 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/messages" element={<AllMessages />} />
-      <Route path="/users/:user_id" element={<MyProfile />} />
+      <Route path="/users/me/:user_id" element={<MyProfile />} />
+      <Route path="/users/:user_id" element={<SingleProfile />} />
       <Route path="/swipes" element={<Swipe />} />
       <Route path='/users/signup' element={<Register />} />
       <Route path='/users/:user_id/matches' element={<Matches />} />
+      <Route path='users/edit_profile/:user_id' element={<EditProfile />} />
+      <Route path="/messages/new" element={<NewMessage />} />
+      <Route path="/messages/delete/:message_id" element={<DeleteMessage />} />
+      <Route path="/messages/edit/:message_id" element={<EditMessage />} />
+      <Route path="/messages/:message_id" element={<MessageThread />} />
+      
        
 
       </Routes>

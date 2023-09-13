@@ -24,7 +24,7 @@ router.get('/:user_id', async (req, res, next) => {
     }
 });
 
-//POST - /api/users - create new user
+//POST - /api/users/signup - create new user
 router.post('/signup', async (req, res, next) => {
     try{
         const user = await createUser(req.body);
@@ -35,7 +35,7 @@ router.post('/signup', async (req, res, next) => {
 });
 
 // PUT - /api/users/:user_id - update user
-router.put('/:user_id', async (req, res, next) => {
+router.put('/edit_profile/:user_id', async (req, res, next) => {
     try{
         const user = await updateUser(req.params.user_id, req.body);
         res.send(user);

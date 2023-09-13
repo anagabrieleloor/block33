@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { fetchMessages } from "../API/messages";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import DeleteMessage from "./DeleteMessage";
+import EditMessage from "./EditMessage";
+import ReplyMessage from "./ReplyMessage";
 
 export default function AllMessages() {
   const [messages, setMessages] = useState([]);
@@ -16,25 +18,35 @@ export default function AllMessages() {
       console.log(response);
 
       setMessages(response);
-      }
+    }
     getAllMessages();
   }, []);
 
-  
+
 
 
   return (
     <div className="message-card">
       <h3>messages:</h3>
-      {messages.map((message) => ( 
-        
+
+      <Link to="/messages/new">send a message</Link>
+
+      {messages.map((message) => (
+
         <div key={message.message_id}>
-          
-          <h4>{message.sender_id}</h4>
+
+          <h4>{message.sender_first_name}</h4>
           <p>
-            <img src={message.sender_id.photos} id="message-profile-image" />
+            <Link to={`/messages/${message.message_id}?thread_id=${message.thread_id}?sender_id=${message.sender_id}`}>
+            <img src={message.sender_photos} id="user-profile-image" />
+            </Link>
           </p>
-          <p>message: {message.message_content}</p>
+          <p>message: {message.sender_first_name}: {message.message_content}</p>
+          <DeleteMessage message_id={message.message_id} />
+          <Link
+            to={`/messages/edit/${message.message_id}`}>edit
+          </Link>
+
           <hr className="rounded" />
         </div>
       ))}

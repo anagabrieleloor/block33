@@ -44,7 +44,7 @@ export async function login(username, password) {
     }
 }
 
-  export async function registerUser(username, password,) {
+  export async function registerUser(username, password) {
     try {
   const response = await fetch(
     `${BASE_URL}/users/signup`, {
@@ -61,10 +61,10 @@ export async function login(username, password) {
   });
   const result = await response.json();
 
-  console.log(result)
+  console.log("result", result)
   return result
 } catch (error) {
-  console.error(error);
+  console.error("sign up yikes", error);
 }
 }
 
@@ -102,4 +102,35 @@ export async function fetchMatches(user_id) {
         console.error(error);
         return error;
     }
+}
+
+export async function updateProfile(user_id, updatedUserData) {
+  try {
+      const response = await fetch(`${BASE_URL}/users/edit_profile/${user_id}`, {
+          method: "PUT",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: {
+              username: updatedUserData.username,
+              password: updatedUserData.password,
+              first_name: updatedUserData.first_name,
+              last_name: updatedUserData.last_name,
+              gender: updatedUserData.gender,
+              location: updatedUserData.location,
+              education: updatedUserData.education,
+              work: updatedUserData.work,
+              photos: updatedUserData.photos,
+              about_me: updatedUserData.about_me,
+              song: updatedUserData.song
+            }, 
+          })
+      });
+      const result = await response.json();
+      console.log("result", result);
+      return result
+  } catch (error) {
+      console.error(error)
+  }
 }

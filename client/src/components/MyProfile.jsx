@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchUserProfile } from "../API";
+import EditProfile from "./EditProfile";
 
 export default function UserProfile() {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
 
+  // Function to open the pop-up
+  function openForm() {
+    console.log("Opening the pop-up");
+    setIsEditFormVisible(true);
+  }
+
+  // Function to close the pop-up
+  function closeForm() {
+    setIsEditFormVisible(false);
+  }
 
   useEffect(() => {
     async function getSingleUser() {
@@ -27,7 +40,11 @@ export default function UserProfile() {
 
   return (
     <div className="container">
-      hello
+     
+      hello qt
+      
+      
+      {/* {user ? <EditProfile user={user} /> : null} */}
       {error && <p>{error}</p>}
       {user && (
         <div className="card">
@@ -48,37 +65,25 @@ export default function UserProfile() {
           <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
           <li><a href="#"><i className="fa fa-codepen"></i></a></li>
         </ul>
-        <button className="btn draw-border">edit</button>
+        {/* <button className="btn draw-border" onClick={() => navigate(`/users/edit_profile/:user_id`)}>edit</button> */}
+
+        {isEditFormVisible && (
+            <div className="form-popup" id="myForm">
+              {user ? <EditProfile user={user} /> : null}
+            </div>
+          )}
+        <button className="btn draw-border" onClick={openForm}>edit</button>
+        {/* <div className="form-popup" id="myForm">
+        {user ? <EditProfile user={user} /> : null}
+          </div> */}
+
         <button className="btn draw-border">delete</button>
+     
         </div>
+        
       )}
     </div>
+    
   );
 }
 
-//  <div className="container">
-
-//   <div className="card" key={user.user_id}> 
-//     <img src={user.photos} alt={`${user.first_name}'s Profile`} id="user-profile-image" />
-//     <p className="card__name">{user.first_name}</p>
-//     <div className="grid-container">
-//       <div className="grid-child-posts">
-//         <p>age: {user.age}</p>
-//       </div>
-//       <div className="grid-child-followers">
-//         <p>location: {user.location}</p><br />
-//       </div>
-    
-//     </div>
-//     <ul className="social-icons">
-//       <li><a href="#"><i className="fa fa-instagram"></i></a></li>
-//       <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-//       <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
-//       <li><a href="#"><i className="fa fa-codepen"></i></a></li>
-//     </ul>
-//     <button className="btn draw-border">Like</button>
-//     <button className="btn draw-border">Pass</button>
-//   </div>
-
-// </div>
-// )}; 

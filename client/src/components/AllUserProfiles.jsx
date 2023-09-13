@@ -9,10 +9,7 @@ export default function AllUserProfiles() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   // const [searchParam, setSearchParam] = useState("");
-  const playSpotifySong = (songUrl) => {
-    const audio = new Audio(songUrl);
-    audio.play();
-  };
+
 
   useEffect(() => {
     async function getAllUsers() {
@@ -24,32 +21,7 @@ export default function AllUserProfiles() {
     getAllUsers();
   }, []);
 
-  
 
-
-//   return (
-//     <div>
-//       {users.map((user) => ( 
-        
-//         <div key={user.user_id}>
-//           <h4>{user.first_name}</h4>
-//           <p>
-//             <img src={user.photos} alt={`${user.first_name}'s Profile`} id="user-profile-image" />
-//           </p>
-//           <p>age: {user.age}</p>
-//           <p>location: {user.location}</p>
-//           <p>about me: {user.about_me}</p>
-//           {/* Play Spotify song */}
-//           {user.song && (
-//             <button onClick={() => playSpotifySong(user.song)}>
-//               Play Spotify Song
-//             </button>
-//           )}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
 return (
   <div className="container">
     {users.map((user) => ( 

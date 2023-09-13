@@ -31,20 +31,38 @@ const swipes = [
     { user1: 1, user2: 2, is_like: true, is_pass: false },
     { user1: 2, user2: 1, is_like: true, is_pass: false },
     { user1: 5, user2: 2, is_like: false, is_pass: true },
-    { user1: 4, user2: 3, is_like: false, is_pass: true }
+    { user1: 4, user2: 3, is_like: false, is_pass: true },
+    { user1: 1, user2: 6, is_like: true, is_pass: false },
+    { user1: 1, user2: 7, is_like: true, is_pass: false },
+    { user1: 1, user2: 8, is_like: true, is_pass: false },
+    { user1: 1, user2: 9, is_like: true, is_pass: false },
+    { user1: 1, user2: 10, is_like: true, is_pass: false },
+    { user1: 1, user2: 11, is_like: true, is_pass: false },
+    { user1: 1, user2: 12, is_like: true, is_pass: false },
+    { user1: 1, user2: 13, is_like: true, is_pass: false },
+    { user1: 6, user2: 1, is_like: true, is_pass: false },
+    { user1: 7, user2: 1, is_like: true, is_pass: false },
+    { user1: 8, user2: 1, is_like: true, is_pass: false },
+    { user1: 9, user2: 1, is_like: true, is_pass: false },
+    { user1: 10, user2: 1, is_like: true, is_pass: false },
+    { user1: 11, user2: 1, is_like: true, is_pass: false },
+    { user1: 12, user2: 1, is_like: true, is_pass: false },
+    { user1: 13, user2: 1, is_like: true, is_pass: false }
 ]
 
 //messages
+
 const messages = [
-    { sender_id: 3, receiver_id: 1, message_content: "hehehehe" },
-    { sender_id: 4, receiver_id: 1, message_content: "wassup" },
-    { sender_id: 5, receiver_id: 1, message_content: "hola bb" },
-    { sender_id: 2, receiver_id: 1, message_content: "q mas pues" },
-    { sender_id: 6, receiver_id: 1, message_content: "Hey there!" },
-    { sender_id: 7, receiver_id: 1, message_content: "Good morning!" },
-    { sender_id: 8, receiver_id: 1, message_content: "How's it going?" },
-    { sender_id: 9, receiver_id: 1, message_content: "Bonjour!" },
-    { sender_id: 10, receiver_id: 1, message_content: "Greetings!" },
+    { sender_id: 3, receiver_id: 1, thread_id: 1, message_content: "hehehehe" },
+    { sender_id: 4, receiver_id: 1, thread_id: 2, message_content: "wassup" },
+    { sender_id: 5, receiver_id: 1, thread_id: 3, message_content: "hola bb" },
+    { sender_id: 2, receiver_id: 1, thread_id: 4, message_content: "q mas pues" },
+    { sender_id: 6, receiver_id: 1, thread_id: 5, message_content: "Hey there!" },
+    { sender_id: 7, receiver_id: 1, thread_id: 7, message_content: "Good morning!" },
+    { sender_id: 8, receiver_id: 1, thread_id: 8, message_content: "How's it going?" },
+    { sender_id: 9, receiver_id: 1, thread_id: 9, message_content: "Bonjour!" },
+    { sender_id: 10, receiver_id: 1, thread_id: 10, message_content: "Greetings!" },
+    { sender_id: 1, receiver_id: 2, thread_id: 4, message_content: "hiiiii" }
 ]
 
 module.exports = { users, swipes, messages };

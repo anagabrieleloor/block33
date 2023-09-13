@@ -50,25 +50,20 @@ const createTables = async () => {
             is_like BOOLEAN,
             is_pass BOOLEAN
         );
+        
         CREATE TABLE messages (
             message_id SERIAL PRIMARY KEY,
             sender_id INTEGER REFERENCES users(user_id),
             receiver_id INTEGER REFERENCES users(user_id),
             message_content varchar(500),
-            sender_username varchar(32) REFERENCES users(username)
+            sender_username varchar(32) REFERENCES users(username),
+            thread_id SERIAL,
+            created_at TIMESTAMPTZ DEFAULT NOW()
         );
     `)
     console.log("tables built!")
 }
 
-
-//sessions?? 
-// CREATE TABLE sessions (
-//     session_id SERIAL PRIMARY KEY,
-//     user_id INT REFERENCES users(user_id),
-//     session_token VARCHAR(128) NOT NULL,
-//     expiration_timestamp TIMESTAMP NOT NULL,
-// );
 
 //inserting mock data from seedData.js
 

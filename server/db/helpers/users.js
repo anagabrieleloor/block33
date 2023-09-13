@@ -116,12 +116,23 @@ const getUserMatches = async (user_id) => {
     try {
         const { rows: matches }
             = await client.query(`
-            SELECT u2.user_id, u2.first_name
-            FROM swipes s1
-            JOIN swipes s2 ON s1.user1 = s2.user2 AND s1.user2 = s2.user1 AND s1.is_like = TRUE AND s2.is_like = TRUE
-            JOIN users u1 ON s1.user1 = u1.user_id
-            JOIN users u2 ON s1.user2 = u2.user_id
-            WHERE s1.user1 = ${user_id};             
+            SELECT
+            u1.user_id AS user1_id,
+            u1.first_name AS user1_first_name,
+            u1.photos AS user1_photos,
+            u2.user_id AS user2_id,
+            u2.first_name AS user2_first_name,
+            u2.photos AS user2_photos
+        FROM
+            swipes s1
+        JOIN
+            swipes s2 ON s1.user1 = s2.user2 AND s1.user2 = s2.user1 AND s1.is_like = TRUE AND s2.is_like = TRUE
+        JOIN
+            users u1 ON s1.user1 = u1.user_id
+        JOIN
+            users u2 ON s1.user2 = u2.user_id
+        WHERE
+            s1.user1 = ${user_id};                   
         `);
         return matches;
     } catch (error) {

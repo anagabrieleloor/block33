@@ -15,18 +15,23 @@ export default function SignUp() {
     // const [photos, setPhotos] = useState("");
     // const [aboutMe, setAboutMe] = useState("");
     // const [song, setSong] = useState("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
 
-    async function handleSubmit(e) {
+
+    async function signUp(e) {
         e.preventDefault();
+       
         try {
-            const response = await registerUser({username, password});
+            const response = await registerUser(username, password);
             console.log("thx for signing up", response);
             setUsername("");
             setPassword("");
             // setFirstName("");
 
-            navigate("/users");
+            // navigate("/users");
+            console.log("Response:", response);
 
         } catch (error) {
             console.error("try again bb", error);
@@ -34,16 +39,18 @@ export default function SignUp() {
     }
 
     return (
+      
+        
         <div className="login-card">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={signUp}>
                 <h3>sign up</h3>
-                <label>Username:</label>
+                <label>username:</label>
                 <input
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <br />
-                <label>Password:</label>
+                <label>password:</label>
                 <input
                     type="password"
                     value={password}
