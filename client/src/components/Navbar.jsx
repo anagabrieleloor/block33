@@ -16,7 +16,7 @@ return (
         <Link to ="/messages">messages</Link>
         <Link to ="/swipes">swipe</Link>
         <Link to ="/users/:user_id/matches">matches</Link>
-        <Link to ="/users/edit_profile/:user_id">edit profile</Link>
+        <Link to ="/users/edit_profile/">edit profile</Link>
         </div>
         
     </div>

@@ -83,3 +83,15 @@ export async function fetchMessageById(message_id) {
         return error;
     }
 }
+
+export async function fetchMessageByThread(thread_id) {
+    try {
+        const response = await fetch(`${BASE_URL}/messages/thread/${thread_id}`);
+        const result = await response.json();
+        console.log(result);
+        return result
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}

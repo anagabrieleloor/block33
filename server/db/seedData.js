@@ -62,7 +62,11 @@ const messages = [
     { sender_id: 8, receiver_id: 1, thread_id: 8, message_content: "How's it going?" },
     { sender_id: 9, receiver_id: 1, thread_id: 9, message_content: "Bonjour!" },
     { sender_id: 10, receiver_id: 1, thread_id: 10, message_content: "Greetings!" },
-    { sender_id: 1, receiver_id: 2, thread_id: 4, message_content: "hiiiii" }
+    { sender_id: 1, receiver_id: 2, thread_id: 4, message_content: "hiiiii" },
+    //replies to test thread
+    { sender_id: 1, receiver_id: 3, thread_id: 1, message_content: "omg hi!" }, 
+    { sender_id: 3, receiver_id: 1, thread_id: 1, message_content: "no offense but do u wanna get married" }, 
+    { sender_id: 1, receiver_id: 3, thread_id: 1, message_content: "ya <3" }, 
 ]
 
 module.exports = { users, swipes, messages };

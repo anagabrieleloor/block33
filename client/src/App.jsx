@@ -34,11 +34,11 @@ function App() {
       <Route path="/swipes" element={<Swipe />} />
       <Route path='/users/signup' element={<Register setToken={setToken} />} />
       <Route path='/users/:user_id/matches' element={<Matches />} />
-      <Route path='users/edit_profile/:user_id' element={<EditProfile />} />
+      <Route path='/users/edit_profile/:user_id' element={<EditProfile />} />
       <Route path="/messages/new" element={<NewMessage />} />
       <Route path="/messages/delete/:message_id" element={<DeleteMessage />} />
       <Route path="/messages/edit/:message_id" element={<EditMessage />} />
-      <Route path="/messages/:message_id" element={<MessageThread />} />
+      <Route path="/messages/thread/:thread_id" element={<MessageThread />} />
       
        
 

@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { updateProfile } from "../API";
 import { fetchUserProfile } from "../API";
 
 
-export default function EditProfile({ user_id }) {
+export default function EditProfile() {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { user_id } = useParams();
     
     
     

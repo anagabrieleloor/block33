@@ -25,9 +25,9 @@ router.get('/:message_id', async (req, res, next) => {
 });
 
 // GET - /api/messages/:message_id - get message by thread
-router.get('/:thread_id', async (req, res, next) => {
+router.get('/thread/:thread_id', async (req, res, next) => {
     try {     
-        const message = await getMessagesByThread(req.params.message_id);
+        const message = await getMessagesByThread(req.params.thread_id);
         res.send(message);
     } catch (error) {
         next(error);
