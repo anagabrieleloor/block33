@@ -73,7 +73,7 @@ const updateUser = async (user_id, updatedUserData) => {
         photos = $9, 
         about_me = $10, 
         song = $11
-        WHERE user_id = ${user_id}
+        WHERE user_id = $12
         RETURNING *;
         `,
                 [
@@ -87,7 +87,8 @@ const updateUser = async (user_id, updatedUserData) => {
                     updatedUserData.work,
                     updatedUserData.photos,
                     updatedUserData.about_me,
-                    updatedUserData.song
+                    updatedUserData.song,
+                    user_id
                 ]
             );
         return user;

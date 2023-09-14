@@ -11,7 +11,7 @@ return (
         
         <div id="navbar-links">
         <Link to ="/">home</Link>
-        <Link to ="/users/me/:user_id">my profile</Link>
+        <Link to ="/users/1">my profile</Link>
         <Link to ="/users">users</Link>
         <Link to ="/messages">messages</Link>
         <Link to ="/swipes">swipe</Link>

@@ -4,7 +4,7 @@ import { login } from "../API";
 
 
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -13,7 +13,10 @@ export default function Login() {
     event.preventDefault();
     try {
       const response = await login(username, password);
+      
+      setToken(response.user.token);
         console.log("ur in!!!!", response);
+        console.log("token maybe:", response.user.token)
         navigate("/users/me/:user_id");
 
     } catch (err) {

@@ -31,17 +31,17 @@ const createTables = async () => {
     await client.query(`
         CREATE TABLE users (
             user_id SERIAL PRIMARY KEY,
-            username varchar(32) UNIQUE NOT NULL,
-            password varchar(32) NOT NULL,
-            first_name varchar(32) NOT NULL,
-            last_name varchar(32) NOT NULL,
-            gender gender_enum NOT NULL,
-            location varchar(32) NOT NULL,
+            username varchar(32) UNIQUE,
+            password varchar(8000),
+            first_name varchar(32),
+            last_name varchar(32),
+            gender gender_enum,
+            location varchar(32),
             education varchar(255),
             work varchar(255),
-            photos varchar(8000) NOT NULL,
+            photos varchar(10000),
             about_me varchar(500),
-            song varchar(8000)
+            song varchar(10000)
         );
         CREATE TABLE swipes (
             swipe_id SERIAL PRIMARY KEY,

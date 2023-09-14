@@ -20,7 +20,7 @@ import MessageThread from "./components/MessageThread";
 
 
 function App() {
-  
+  const [token, setToken] = useState(null);
 
   return (
     <div className="App">
@@ -29,10 +29,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/messages" element={<AllMessages />} />
-      <Route path="/users/me/:user_id" element={<MyProfile />} />
-      <Route path="/users/:user_id" element={<SingleProfile />} />
+      <Route path="/users/:user_id" element={<MyProfile />} />
+      {/* <Route path="/users/:user_id" element={<SingleProfile />} /> */}
       <Route path="/swipes" element={<Swipe />} />
-      <Route path='/users/signup' element={<Register />} />
+      <Route path='/users/signup' element={<Register setToken={setToken} />} />
       <Route path='/users/:user_id/matches' element={<Matches />} />
       <Route path='users/edit_profile/:user_id' element={<EditProfile />} />
       <Route path="/messages/new" element={<NewMessage />} />
@@ -53,7 +53,7 @@ function Home() {
     <div id="home">
       <h2>&hearts; welcome &hearts;</h2>
       {/* <Register /> */}
-      <Login token={token} setToken={setToken} />
+      <Login setToken={setToken} />
       <Link to ="/users/signup">new? sign up</Link>
       {/* <Register /> */}
       

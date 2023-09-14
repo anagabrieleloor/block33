@@ -24,7 +24,7 @@ export default function UserProfile() {
   useEffect(() => {
     async function getSingleUser() {
       try {
-        const APIResponse = await fetchUserProfile(1);
+        const APIResponse = await fetchUserProfile(user_id);
         if (APIResponse) {
           setUser(APIResponse);
         } else {
@@ -69,7 +69,7 @@ export default function UserProfile() {
 
         {isEditFormVisible && (
             <div className="form-popup" id="myForm">
-              {user ? <EditProfile user={user} /> : null}
+              {user ? <EditProfile user_id={user_id} /> : null}
             </div>
           )}
         <button className="btn draw-border" onClick={openForm}>edit</button>

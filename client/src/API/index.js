@@ -44,7 +44,7 @@ export async function login(username, password) {
     }
 }
 
-  export async function registerUser(username, password) {
+  export async function registerUser(username, password, first_name, last_name, gender, location, education, work, photos, about_me, song) {
     try {
   const response = await fetch(
     `${BASE_URL}/users/signup`, {
@@ -54,8 +54,17 @@ export async function login(username, password) {
     },
     body: JSON.stringify({
       user: {
-        username: username,
-        password: password
+        username,
+        password,
+        first_name,
+        last_name,
+        gender,
+        location,
+        education,
+        work, 
+        photos,
+        about_me,
+        song
       },
     })
   });
@@ -111,21 +120,8 @@ export async function updateProfile(user_id, updatedUserData) {
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            user: {
-              username: updatedUserData.username,
-              password: updatedUserData.password,
-              first_name: updatedUserData.first_name,
-              last_name: updatedUserData.last_name,
-              gender: updatedUserData.gender,
-              location: updatedUserData.location,
-              education: updatedUserData.education,
-              work: updatedUserData.work,
-              photos: updatedUserData.photos,
-              about_me: updatedUserData.about_me,
-              song: updatedUserData.song
-            }, 
-          })
+          body: JSON.stringify(updatedUserData)
+         
       });
       const result = await response.json();
       console.log("result", result);

@@ -129,6 +129,7 @@ const editMessage = async (message_id, updatedMessage) => {
               updatedMessage.sender_id,
               updatedMessage.receiver_id,
               updatedMessage.message_content,
+              updatedMessage.thread_id,
               
             ]
           );
