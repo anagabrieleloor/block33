@@ -25,6 +25,29 @@ const createUser = async ({ username, password, first_name, last_name, gender, l
     }
 }
 
+// const createUser = async ({ username, password }) => {
+//     try {
+//         const {
+//             rows: [user],
+//             //INSER SQL query
+//         } = await client.query(
+//             // INSERT INTO table(column1, column2, etc)
+//             //VALUES (var1, etc)
+//             //RETURNING everything
+//             `
+//                 INSERT INTO users(username, password)
+//                 VALUES($1, $2)
+//                 RETURNING *;
+//             `,
+//             //hook parameteres to variables
+//             [username, password]
+//         )
+//         return user
+//     } catch (error) {
+//         throw error
+//     }
+// }
+
 //GET - /api/users - get all users
 const getAllUsers = async () => {
     try {
@@ -162,6 +185,20 @@ const loginUser = async (username, password) => {
     }
 };
 
+//post 
+const getUserByUsername = async (username) => {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      SELECT * FROM users
+      WHERE users.username = $1
+      `,
+      [username]
+    )
+    return user
+  }
+
 //GET - api/users/:session_id - current user profile 
 const currentUser = async (user_id) => {
     try {
@@ -185,4 +222,4 @@ const currentUser = async (user_id) => {
 
 
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser }
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername }

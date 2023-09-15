@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import AllMessages from "./components/AllMessages";
 // import UserProfile from "./MyProfile";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AllUserProfiles from "./components/AllUserProfiles";
 import MyProfile from "./components/MyProfile";
@@ -17,19 +17,26 @@ import DeleteMessage from "./components/DeleteMessage";
 import EditMessage from "./components/EditMessage";
 import SingleProfile from "./components/SingleProfile";
 import MessageThread from "./components/MessageThread";
+import SignOut from "./components/SignOut";
 
 
 function App() {
   const [token, setToken] = useState(null);
+  const [user_id, setUserId ] =useState(null);
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+    setUserId(localStorage.getItem('user_id'));
+  
+}, [])
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar token={token} />
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/messages" element={<AllMessages />} />
-      <Route path="/users/:user_id" element={<MyProfile />} />
+      <Route path="/users/:user_id" element={<MyProfile token={token}/>} />
       {/* <Route path="/users/:user_id" element={<SingleProfile />} /> */}
       <Route path="/swipes" element={<Swipe />} />
       <Route path='/users/signup' element={<Register setToken={setToken} />} />
@@ -38,7 +45,8 @@ function App() {
       <Route path="/messages/new" element={<NewMessage />} />
       <Route path="/messages/delete/:message_id" element={<DeleteMessage />} />
       <Route path="/messages/edit/:message_id" element={<EditMessage />} />
-      <Route path="/messages/thread/:thread_id" element={<MessageThread />} />
+      <Route path="/messages/thread/:thread_id" element={<MessageThread token={token} />} />
+      <Route path="/users/signout" element={<SignOut token={token} setToken={setToken} />} />
       
        
 
@@ -49,11 +57,15 @@ function App() {
 
 function Home() {
   const [token, setToken] = useState(null);
+  useEffect(() => {
+    setToken(window.localStorage.getItem('token'));
+    
+}, [])
   return (
     <div id="home">
       <h2>&hearts; welcome &hearts;</h2>
       {/* <Register /> */}
-      <Login setToken={setToken} />
+      <Login token={token} setToken={setToken} />
       <Link to ="/users/signup">new? sign up</Link>
       {/* <Register /> */}
       

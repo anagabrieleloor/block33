@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchUserProfile } from "../API";
 import EditProfile from "./EditProfile";
 
-export default function UserProfile() {
+export default function UserProfile({token}) {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export default function UserProfile() {
   useEffect(() => {
     async function getSingleUser() {
       try {
-        const APIResponse = await fetchUserProfile(user_id);
+        const APIResponse = await fetchUserProfile(user_id, token);
         if (APIResponse) {
           setUser(APIResponse);
         } else {
@@ -36,7 +36,7 @@ export default function UserProfile() {
       }
     }
     getSingleUser();
-  }, [user_id]);
+  }, [user_id, token]);
 
   return (
     <div className="container">
@@ -68,10 +68,10 @@ export default function UserProfile() {
         {/* <button className="btn draw-border" onClick={() => navigate(`/users/edit_profile/:user_id`)}>edit</button> */}
 
         {isEditFormVisible && (
-            <div className="form-popup" id="myForm">
-              {user ? <EditProfile user_id={user_id} /> : null}
-            </div>
-          )}
+  <div className={`form-popup ${isEditFormVisible ? 'visible' : ''}`} id="myForm">
+    {user ? <EditProfile user_id={user_id} /> : null}
+  </div>
+)}
         <button className="btn draw-border" onClick={openForm}>edit</button>
         {/* <div className="form-popup" id="myForm">
         {user ? <EditProfile user={user} /> : null}

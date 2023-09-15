@@ -82,7 +82,7 @@ export default function EditProfile() {
             <p>password:</p>
             <input
                 value={user.password}
-                type="text"
+                type="password"
                 name="password"
                 placeholder="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}

@@ -11,11 +11,10 @@ export default function NewMessage() {
     const navigate = useNavigate();
 
 
-// Your component or function where you make the API call
 async function createMessage(event) {
   event.preventDefault();
 
-  // Data serialization
+  
   const requestBody = JSON.stringify({
     sender_id,
     receiver_id,
@@ -24,7 +23,7 @@ async function createMessage(event) {
   });
 
   try {
-    // API request headers and fetch request
+ 
     const response = await fetch(`${BASE_URL}/messages/new`, {
       method: 'POST',
       headers: {
@@ -33,21 +32,20 @@ async function createMessage(event) {
       body: requestBody,
     });
 
-    // API Response Handling
     if (response.ok) {
       const data = await response.json();
       console.log('message sent ayooo', data);
 
-      // Update your UI or state with the response data here
+      
     } else {
       console.error('message send go oopsie:', response.statusText);
 
-      // Handle errors or show an error message to the user
+    
     }
   } catch (error) {
     console.error('Error:', error);
 
-    // Handle unexpected errors here
+  
   }
 }
 

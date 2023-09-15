@@ -12,6 +12,8 @@ export default function MessageThread() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
+
   useEffect(() => {
     async function getMessageThread() {
       try {
@@ -44,9 +46,12 @@ export default function MessageThread() {
   }
 
   return (
+    <div className="thread-card-container">
     <div className="thread-card">
       {error && <p>{error}</p>}
-      <h3>Message thread:</h3>
+    
+      <h3 className="chat-banner">message thread:</h3>
+      
       {/* <Link to="/messages/new">Send a message</Link> */}
 
       {messages.map((message) => (
@@ -54,19 +59,23 @@ export default function MessageThread() {
           <h4>{message.sender_first_name}</h4>
           <p>
             <Link to={`/users/${message.sender_id}`}>
-              <img src={message.sender_photos} id="user-profile-image" alt={`Profile of ${message.sender_first_name}`} />
+              <img src={message.sender_photos} id="chat-profile-pic" alt={`Profile of ${message.sender_first_name}`} />
             </Link>
           </p>
-          <p>Message: {message.sender_first_name}: {message.message_content}</p>
+          <p id="chat-bubble">{message.sender_first_name}: {message.message_content}</p>
+          
           {/* <ReplyMessage message_id={message.message_id} thread_id={message.thread_id} /> */}
-          <DeleteMessage message_id={message.message_id} />
+          {/* <DeleteMessage message_id={message.message_id} />
           <Link
             to={`/messages/edit/${message.message_id}?sender_id=${message.sender_id}&receiver_id=${message.receiver_id}`}>Edit
-          </Link><br />
-          <hr className="rounded" />
+          </Link><br /> */}
+          
         </div>
       ))}
-      <ReplyMessage className="reply" message_id={messages[0].message_id} thread_id={thread_id} />
+     
+    </div>
+    <ReplyMessage id="reply" message_id={messages[0].message_id} thread_id={thread_id} />
+    
     </div>
   );
 }

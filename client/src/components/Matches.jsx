@@ -19,7 +19,7 @@ export default function Matches() {
     
     return (
         <div className="message-card">
-          <h3>matches:</h3>
+          <h3 className="chat-banner">matches:</h3>
           {matches.map((match) => (
             <div key={match.user2_id}>
               <h4>{match.user2_first_name}</h4>

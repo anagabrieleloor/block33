@@ -38,10 +38,43 @@ export async function login(username, password) {
         });
         const result = await response.json();
         console.log("result", result);
+        
+        if (response.ok) {
+          
+          const token = result.token;
+          const user_id = result.user.user_id;
+
+          console.log("token", token);
+          console.log("user_id", user_id)
+
+          // saving token to local storage
+          localStorage.setItem('token', token);
+          localStorage.setItem('user_id', user_id)
+          console.log('local storage:', localStorage)
+      }
+
         return result
+        
     } catch (error) {
         console.error(error)
     }
+}
+
+export async function logOut() {
+  try {
+    const response = await fetch(`${BASE_URL}/users/logout`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+    },
+
+    });
+    const result = await response.json();
+    console.log("bye for now", result);
+    return result
+  } catch (error) {
+    console.error(error)
+  }
 }
 
   export async function registerUser(username, password, first_name, last_name, gender, location, education, work, photos, about_me, song) {
@@ -54,21 +87,27 @@ export async function login(username, password) {
     },
     body: JSON.stringify({
       user: {
-        username,
-        password,
-        first_name,
-        last_name,
-        gender,
-        location,
-        education,
-        work, 
-        photos,
-        about_me,
-        song
+        username: username,
+        password: password,
+        first_name: first_name, 
+        last_name: last_name, 
+        gender: gender, 
+        location: location, 
+        education: education, 
+        work: work, 
+        photos: photos, 
+        about_me: about_me, 
+        song:song
+
       },
     })
   });
   const result = await response.json();
+  if (response.headers.get('content-type') === 'application/json' && result.token) {
+    console.log("Token:", result.token);
+  } else {
+    console.log("No token found in the response.");
+  }
 
   console.log("result", result)
   return result
@@ -77,10 +116,11 @@ export async function login(username, password) {
 }
 }
 
-export async function fetchUserProfile(user_id) {
+export async function fetchUserProfile(user_id, token) {
     try {
       const response = await fetch(`${BASE_URL}/users/${user_id}`, {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         
         },

@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername } = require('../db/helpers/users');
 const jwt = require('jsonwebtoken');
 
-const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser } = require('../db/helpers/users');
+
 const { JWT_SECRET } = require('../secrets');
+const { token } = require('morgan');
 
 
 const SALT_ROUNDS = 10;
@@ -30,45 +32,48 @@ router.get('/:user_id', async (req, res, next) => {
 });
 
 // POST - /api/users/signup - create new user
-// router.post('/signup', async (req, res, next) => {
-//     try {
-//         console.log(req.body)
-//         const { username, password } = req.body
-//         //hashing the password
-//         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
-//         //sending username and hashed pw to database
-//         const user = await createUser({username, password: hashedPassword});
-//         //removing password from user object for security reasons
-//         delete user.password
-
-//         //creating token
-//         const token = jwt.sign(user, JWT_SECRET)
-
-//         // attaching a cookie to response using the token created
-//         res.cookie('token', token, {
-//             sameSite: 'strict',
-//             httpOnly: true,
-//             signed: true
-//         })
-//         console.log('token??:', token)
-//         delete user.password
-//         // console.log(res)
-
-
-//         res.send({user});
-//     } catch (error) {
-//         next(error);
-//     }
-// });
 router.post('/signup', async (req, res, next) => {
-    try{
-        const user = await createUser(req.body);
-        // res.send(user);
+    try {
+        console.log(req.body)
+        const { username, password, first_name, last_name, gender, location, education, work, photos, about_me, song} = req.body.user
         
+        
+        //hashing the password
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
+        //sending username and hashed pw to database
+        const user = await createUser({username, password: hashedPassword, first_name, last_name, gender, location, education, work, photos, about_me, song});
+     
+        //removing password from user object for security reasons
+        delete user.password
+        
+        //creating token
+        const token = jwt.sign(user, JWT_SECRET)
+        // user.token= token
+        // attaching a cookie to response using the token created
+        res.cookie('token', token, {
+            sameSite: 'strict',
+            httpOnly: true,
+            signed: true
+        })
+        console.log('token??:', token)
+        delete user.password
+        // console.log(res)
+
+
+        res.send({message: 'yayy welcome', user});
     } catch (error) {
         next(error);
     }
 });
+// router.post('/signup', async (req, res, next) => {
+//     try{
+//         const user = await createUser(req.body);
+//         // res.send(user);
+        
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
 // PUT - /api/users/:user_id - update user
 router.put('/edit_profile/:user_id', async (req, res, next) => {
@@ -107,8 +112,8 @@ router.post('/login', async (req, res, next) => {
         console.log(req.body)
         const { username, password } = req.body 
         
-        const user = await loginUser(username, password)     
-        res.json({ message: 'yayyy ur logged in', user })
+        const user = await getUserByUsername(username)     
+        console.log('yayyy ur logged in', user )
 
         const validPassword = await bcrypt.compare(password, user.password)
 
@@ -117,6 +122,7 @@ router.post('/login', async (req, res, next) => {
         if (validPassword) {
             //creating token 
             const token = jwt.sign(user, JWT_SECRET)
+            console.log('token:', token)
             //attaching cookie to response using the token created
             res.cookie('token', token, {
                 sameSite: 'strict',
@@ -126,11 +132,11 @@ router.post('/login', async (req, res, next) => {
 
             //assign token to user object 
             // user.token = token
-            console.log('token??:', token)
+            // console.log('token??:', token)
             delete user.password
             res.send({user, token})
         }
-
+        return token;
         
     } catch (error) {
         next(error); 

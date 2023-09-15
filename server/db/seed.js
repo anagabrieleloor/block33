@@ -32,7 +32,7 @@ const createTables = async () => {
         CREATE TABLE users (
             user_id SERIAL PRIMARY KEY,
             username varchar(32) UNIQUE,
-            password varchar(8000),
+            password text,
             first_name varchar(32),
             last_name varchar(32),
             gender gender_enum,

@@ -27,7 +27,7 @@ export default function AllMessages() {
 
   return (
     <div className="message-card">
-      <h3>messages:</h3>
+      <h3 className="all-messages-banner">messages:</h3>
 
       <Link to="/messages/new">send a message</Link>
 
@@ -37,7 +37,7 @@ export default function AllMessages() {
 
           <h4>{message.sender_first_name}</h4>
           <p>
-            <Link to={`/messages/${message.message_id}?thread_id=${message.thread_id}?sender_id=${message.sender_id}`}>
+            <Link to={`/messages/thread/${message.thread_id}`}>
             <img src={message.sender_photos} id="user-profile-image" />
             </Link>
           </p>

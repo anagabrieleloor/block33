@@ -3,7 +3,7 @@ import { registerUser } from "../API";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function SignUp() {
+export default function SignUp({ setToken }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [first_name, setFirstName] = useState("");
@@ -15,27 +15,16 @@ export default function SignUp() {
     const [photos, setPhotos] = useState("");
     const [about_me, setAboutMe] = useState("");
     const [song, setSong] = useState("");
-    // const navigate = useNavigate();
-
+    const navigate = useNavigate();
+    
 
 
     async function signUp(e) {
         e.preventDefault();
-        console.log('username:', username);
-        console.log('password:', password);
-        console.log('first_name:', first_name);
-        console.log('last_name:', last_name);
-        console.log('gender:', gender);
-        console.log('location:', location);
-        console.log('education:', education);
-        console.log('work:', work);
-        console.log('photos:', photos);
-        console.log('about_me:', about_me);
-        console.log('song:', song);
         
         try {
             const response = await registerUser(username, password, first_name, last_name, gender, location, education, work, photos, about_me, song);
-            // setToken(response.user.token);
+            setToken(response.user.token);
             console.log("response:", response);
             setUsername("");
             setPassword("");
@@ -51,8 +40,9 @@ export default function SignUp() {
            
     
 
-            // navigate("/users");
+            navigate("/users");
             console.log("Response:", response);
+            console.log("token maybe:", response.user.token)
 
         } catch (error) {
             console.error("try again bb", error);
@@ -74,19 +64,23 @@ export default function SignUp() {
     return (
       
         
-        <div className="update-card">
+        <div className="register-card">
             <form onSubmit={signUp}>
                 <h3>sign up</h3>
-                <label>username:</label>
+
+
+                <p>username:</p>
                 <input
                     value={username}
+                    placeholder="username"
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <br />
-                <label>password:</label>
+                <p>password:</p>
                 <input
                     type="password"
                     value={password}
+                    placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <br />
@@ -162,62 +156,8 @@ export default function SignUp() {
                 placeholder="song"
                 onChange={(e) => setSong(e.target.value)}
             />
-                {/* <label>first name:</label>
-                <input
-                    type="first name"
-                    value={firstname}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-                <br />
-                <label>last name:</label>
-                <input
-                    type="last name"
-                    value={lastname}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-                <br />
-                <label>gender:</label>
-                <input
-                    type="gender"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                />
-                <br />
-                <label>location:</label>
-                <input
-                    type="location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                />
-                <br />
-                <label>work:</label>
-                <input
-                    type="work"
-                    value={work}
-                    onChange={(e) => setWork(e.target.value)}
-                />
-                <br />
-                <label>photos:</label>
-                <input
-                    type="photos"
-                    value={photos}
-                    onChange={(e) => setPhotos(e.target.value)}
-                />
-                <br />
-                <label>about me:</label>
-                <input
-                    type="about me"
-                    value={aboutme}
-                    onChange={(e) => setAboutMe(e.target.value)}
-                />
-                <br />
-                <label>song:</label>
-                <input
-                    type="song"
-                    value={song}
-                    onChange={(e) => setSong(e.target.value)}
-                />
-                <br /> */}
+            <br />
+              
                 <button className="btn draw-border" type="submit">Submit</button>
                 
             </form>
