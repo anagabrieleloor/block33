@@ -1,22 +1,24 @@
 const client = require('../client')
 
-const createMessage = async ({ sender_id, receiver_id, message_content, thread_id, parent_message_id }) => {
+const createMessage = async ({ sender_id, receiver_id, message_content }) => {
     try {
         const {
             rows: [message],
         } = await client.query (
             `
-            INSERT INTO messages(sender_id, receiver_id, message_content, thread_id, parent_message_id)
-            VALUES($1, $2, $3, $4, $5)
+            INSERT INTO messages(sender_id, receiver_id, message_content, sender_username, receiver_username)
+            VALUES($1, $2, $3, (SELECT username FROM users WHERE user_id = $1), (SELECT username FROM users WHERE user_id = $2))
             RETURNING *;
             `,
-            [sender_id, receiver_id, message_content, thread_id, parent_message_id]
+            [sender_id, receiver_id, message_content]
         )
         return message
     } catch (error) {
         throw error
     }
 }
+
+
 
 //GET - /api/messages - get all messages
 const getAllMessages = async () => {

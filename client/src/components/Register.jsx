@@ -63,7 +63,7 @@ export default function SignUp({ setToken }) {
 
     return (
       
-        
+        <div className="register-container">
         <div className="register-card">
             <form onSubmit={signUp}>
                 <h3>sign up</h3>
@@ -158,12 +158,14 @@ export default function SignUp({ setToken }) {
             />
             <br />
               
-                <button className="btn draw-border" type="submit">Submit</button>
+               
                 
             </form>
-            <Link to ="/">back to login</Link>
+            
         </div>
-        
+        <button className="btn draw-border" type="submit">Submit</button>
+        <Link to ="/">back to login</Link>
+        </div>
     );
     
 }

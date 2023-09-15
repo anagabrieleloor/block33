@@ -35,7 +35,7 @@ async function createMessage(event) {
     if (response.ok) {
       const data = await response.json();
       console.log('message sent ayooo', data);
-
+      navigate(`/messages`);
       
     } else {
       console.error('message send go oopsie:', response.statusText);

@@ -32,16 +32,17 @@ export default function Login({ token, setToken }) {
   
 
   return (
+    <div className="login-container">
     <div className="login-card">
       <form onSubmit={loginUser}>
         <h3>log in</h3>
-        <label>username:</label>
+        <p>username:</p>
                 <input
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <br />
-                <label>password:</label>
+                <p>password:</p>
                 <input
                     type="password"
                     value={password}
@@ -49,13 +50,15 @@ export default function Login({ token, setToken }) {
                 />
                 <br />
         <div>
-          <button className="btn draw-border" type="submit">Submit</button>
+          
         </div>
       </form>
       <div>
        
         {/* <Authenticate token={token} setToken={setToken}/> */}
       </div>
+    </div>
+    <button className="btn draw-border" type="submit">Submit</button>
     </div>
   );
 }

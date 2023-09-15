@@ -74,7 +74,7 @@ export default function MessageThread() {
       ))}
      
     </div>
-    <ReplyMessage id="reply" message_id={messages[0].message_id} thread_id={thread_id} />
+    <ReplyMessage thread_id={thread_id} />
     
     </div>
   );

@@ -58,8 +58,8 @@ const createTables = async () => {
             message_content varchar(500),
             sender_username varchar(32) REFERENCES users(username),
             receiver_username varchar(32) REFERENCES users(username),
-            thread_id SERIAL, -- Identifies the top-level message of each thread
-            parent_message_id INTEGER, -- References the parent message in the same thread
+            thread_id SERIAL, 
+            parent_message_id INTEGER, 
             created_at TIMESTAMPTZ DEFAULT NOW()
         );
     `)

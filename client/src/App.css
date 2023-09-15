@@ -146,9 +146,9 @@ input {
  
 }
 
-.login-card {
+.login-container {
   background-color:  rgba(32,37,45,1);
-  height: 35vh;
+  height: fit-content;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -156,9 +156,25 @@ input {
   box-shadow: rgba(0, 0, 0, 0.7);
   color: white;
   box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
-  width: 35vh;
+  width: fit-content;
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(19,19,34,1) 59%, rgba(235,25,110,1) 100%);
+  z-index: 1;
+  padding: 3px;
+}
 
- 
+.login-card {
+  background-color: rgb(23, 24, 27);
+  
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-bottom: solid 1px white;
+  box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
+  width: 100%;
+  padding: 1px;
 }
 
 .message-card {
@@ -249,6 +265,38 @@ input {
   z-index: 1;
 }
 
+.match-card {
+  background-color: #070707;
+  height: 60vh;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-bottom: solid 1px white;
+  width: 100%;
+  overflow-y: scroll;
+  
+}
+
+.match-container {
+  background-color: black;
+  height: 60vh;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.7);
+  color: white;
+  box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(19,19,34,1) 59%, rgba(235,25,110,1) 100%);
+  width: fit-content;
+  overflow:auto;
+  z-index: 1;
+  padding: 5px;
+}
+
 .form-popup {
   position: fixed;
   top: 50%;
@@ -290,8 +338,25 @@ input {
 
 
 .register-card {
-  background-color:  rgba(32,37,45,1);
-  height: 70vh;
+  background-color:  rgb(23, 24, 27);
+  
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.7);
+  color: white;
+  box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
+  width:100%;
+  padding: 10px;
+  overflow:auto;
+  border-bottom: solid 1px white;
+  z-index: 1000
+ 
+}
+
+.register-container {
+  background-color:  rgb(23, 24, 27);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -301,12 +366,11 @@ input {
   box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
   width:fit-content;
   padding: 10px;
-  overflow:auto;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  z-index: 1000
- 
+  height: 60vh;
+  z-index: 1000;
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(19,19,34,1) 59%, rgba(235,25,110,1) 100%);
 }
+
 
 
 
