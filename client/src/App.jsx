@@ -66,7 +66,7 @@ function Home() {
       <h2>&hearts; welcome &hearts;</h2>
       {/* <Register /> */}
       <Login token={token} setToken={setToken} />
-      <Link to ="/users/signup">new? sign up</Link>
+      
       {/* <Register /> */}
       
     </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../API";
 
 
@@ -52,13 +52,15 @@ export default function Login({ token, setToken }) {
         <div>
           
         </div>
+        <button className="btn draw-border" type="submit">Submit</button>
       </form>
       <div>
        
         {/* <Authenticate token={token} setToken={setToken}/> */}
       </div>
+      
     </div>
-    <button className="btn draw-border" type="submit">Submit</button>
+    <Link to ="/users/signup">new? sign up</Link>
     </div>
   );
 }
