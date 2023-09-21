@@ -2,16 +2,16 @@ const client = require('../client')
 
 const createMessage = async ({ sender_id, receiver_id, message_content, thread_id }) => {
     try {
-        let newThreadId = null; 
+        let newThreadId = thread_id; 
 
         if (!newThreadId) {
             // create new thread_id when not provided
             const {
-                rows: [thread],
+                rows: [message],
             } = await client.query('INSERT INTO messages DEFAULT VALUES RETURNING thread_id;');
-            newThreadId = thread.thread_id;
+            newThreadId = message.thread_id;
         } else {
-            newThreadId = thread_id; // use the esisting thread_id
+            newThreadId = thread_id; // use the exsisting thread_id
         }
 
         const {
@@ -22,7 +22,7 @@ const createMessage = async ({ sender_id, receiver_id, message_content, thread_i
             VALUES($1, $2, $3, (SELECT username FROM users WHERE user_id = $1), (SELECT username FROM users WHERE user_id = $2), $4)
             RETURNING *;
             `,
-            [sender_id, receiver_id, message_content, thread_id]
+            [sender_id, receiver_id, message_content, newThreadId]
         )
         
         return message

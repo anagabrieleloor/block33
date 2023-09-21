@@ -39,7 +39,7 @@ function App() {
       <Route path="/users/:user_id/messages" element={<AllMessages token={token} user_id={user_id} />} />
       <Route path="/users/me/:user_id" element={<MyProfile token={token} user_id={user_id} />} />
       {/* <Route path="/users/:user_id" element={<SingleProfile />} /> */}
-      <Route path="/swipes" element={<Swipe />} />
+      <Route path="/swipes" element={<Swipe token={token} user_id={user_id} />} />
       <Route path='/users/signup' element={<Register setToken={setToken} />} />
       <Route path='/users/:user_id/matches' element={<Matches token={token} user_id={user_id} />} />
       <Route path='/users/edit_profile/:user_id' element={<EditProfile token={token} user_id={user_id} />} />
