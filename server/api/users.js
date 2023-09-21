@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername } = require('../db/helpers/users');
+const { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername, getUserMessages } = require('../db/helpers/users');
 const jwt = require('jsonwebtoken');
 
 
@@ -98,6 +98,16 @@ router.delete('/:user_id', async (req, res, next) => {
 router.get('/:user_id/matches', async (req, res, next) => {
     try{
         const user = await getUserMatches(req.params.user_id);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//GET - /api/users/:user_id/ - get all user messages
+router.get('/:user_id/messages', async (req, res, next) => {
+    try{
+        const user = await getUserMessages(req.params.user_id);
         res.send(user);
     } catch (error) {
         next(error);

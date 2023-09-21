@@ -18,6 +18,7 @@ import EditMessage from "./components/EditMessage";
 import SingleProfile from "./components/SingleProfile";
 import MessageThread from "./components/MessageThread";
 import SignOut from "./components/SignOut";
+import ReplyMessage from "./components/ReplyMessage";
 
 
 function App() {
@@ -35,18 +36,20 @@ function App() {
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<AllUserProfiles />} />
-      <Route path="/messages" element={<AllMessages />} />
-      <Route path="/users/:user_id" element={<MyProfile token={token}/>} />
+      <Route path="/users/:user_id/messages" element={<AllMessages token={token} user_id={user_id} />} />
+      <Route path="/users/me/:user_id" element={<MyProfile token={token} user_id={user_id} />} />
       {/* <Route path="/users/:user_id" element={<SingleProfile />} /> */}
       <Route path="/swipes" element={<Swipe />} />
       <Route path='/users/signup' element={<Register setToken={setToken} />} />
-      <Route path='/users/:user_id/matches' element={<Matches />} />
-      <Route path='/users/edit_profile/:user_id' element={<EditProfile />} />
+      <Route path='/users/:user_id/matches' element={<Matches token={token} user_id={user_id} />} />
+      <Route path='/users/edit_profile/:user_id' element={<EditProfile token={token} user_id={user_id} />} />
       <Route path="/messages/new" element={<NewMessage />} />
+      <Route path="/messages/new" element={<ReplyMessage token={token} user_id={user_id} sender_id={user_id} />} />
       <Route path="/messages/delete/:message_id" element={<DeleteMessage />} />
       <Route path="/messages/edit/:message_id" element={<EditMessage />} />
       <Route path="/messages/thread/:thread_id" element={<MessageThread token={token} />} />
       <Route path="/users/signout" element={<SignOut token={token} setToken={setToken} />} />
+      <Route path="users/:user_id" element={<SingleProfile token={token} user_id={user_id} sender_id={user_id} />} />
       
        
 

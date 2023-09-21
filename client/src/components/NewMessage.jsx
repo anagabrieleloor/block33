@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { newMessage } from "../API/messages";
 const BASE_URL = 'http://localhost:8080/api';
 
-export default function NewMessage() {
-    const [sender_id, setSenderId] = useState("");
-    const [receiver_id, setReceiverId] = useState("");
-    const [thread_id, setThreadId] = useState("");
+export default function NewMessage({token, sender_id, receiver_id}) {
+    // const [sender_id, setSenderId] = useState(null);
+    // const [receiver_id, setReceiverId] = useState(null);
+    // const [thread_id, setThreadId] = useState("");
     const [message_content, setMessageContent] = useState("");
     const navigate = useNavigate();
+    
 
 
 async function createMessage(event) {
@@ -19,7 +20,7 @@ async function createMessage(event) {
     sender_id,
     receiver_id,
     message_content,
-    thread_id,
+
   });
 
   try {
@@ -35,8 +36,13 @@ async function createMessage(event) {
     if (response.ok) {
       const data = await response.json();
       console.log('message sent ayooo', data);
-      navigate(`/messages`);
-      
+
+
+ 
+      const threadId = data.thread_id;
+
+
+      navigate(`/messages/thread/${threadId}`);
     } else {
       console.error('message send go oopsie:', response.statusText);
 
@@ -53,7 +59,7 @@ return (
     <div>
       <form onSubmit={createMessage}>
         <h3>hit their line</h3>
-        <label>from:</label>
+        {/* <label>from:</label>
                 <input
                 type="text"
                 placeholder="one cutie"
@@ -68,7 +74,7 @@ return (
                     value={receiver_id}
                     onChange={(e) => setReceiverId(e.target.value)}
                 />
-                <br />
+                <br /> */}
                 <label>whats uppp?</label>
                 <input
                     type="text"

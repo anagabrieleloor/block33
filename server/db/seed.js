@@ -59,9 +59,9 @@ const createTables = async () => {
             sender_username varchar(32) REFERENCES users(username),
             receiver_username varchar(32) REFERENCES users(username),
             thread_id SERIAL, 
-            parent_message_id INTEGER, 
             created_at TIMESTAMPTZ DEFAULT NOW()
         );
+        
     `)
     console.log("tables built!")
 }

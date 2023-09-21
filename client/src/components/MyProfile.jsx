@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchUserProfile } from "../API";
 import EditProfile from "./EditProfile";
+import ReplyMessage from "./ReplyMessage";
+import NewMessage from "./NewMessage";
 
-export default function UserProfile({token}) {
-  const { user_id } = useParams();
+export default function UserProfile({token, user_id}) {
+  // const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ export default function UserProfile({token}) {
         const APIResponse = await fetchUserProfile(user_id, token);
         if (APIResponse) {
           setUser(APIResponse);
+          // console.log('profile:', user.first_name);
         } else {
           setError("Failed to fetch user profile");
         }
@@ -41,13 +44,15 @@ export default function UserProfile({token}) {
   return (
     <div className="container">
      
-      hello qt
+      {/* hello, {user.first_name} */}
+      hello, qt
       
       
       {/* {user ? <EditProfile user={user} /> : null} */}
       {error && <p>{error}</p>}
       {user && (
         <div className="card">
+          {console.log('profile: ', user.first_name)}
                   <img src={user.photos} alt={`${user.first_name}'s Profile`} id="user-profile-image" />
         <p className="card__name">{user.first_name}</p>
         <div className="grid-container">
@@ -69,7 +74,7 @@ export default function UserProfile({token}) {
 
         {isEditFormVisible && (
   <div className={`form-popup ${isEditFormVisible ? 'visible' : ''}`} id="myForm">
-    {user ? <EditProfile user_id={user_id} /> : null}
+    {user ? <EditProfile user_id={user_id} token={token} /> : null}
   </div>
 )}
         <button className="btn draw-border" onClick={openForm}>edit</button>
@@ -78,6 +83,7 @@ export default function UserProfile({token}) {
           </div> */}
 
         <button className="btn draw-border">delete</button>
+       
      
         </div>
         

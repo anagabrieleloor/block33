@@ -6,11 +6,8 @@ const createUser = async ({ username, password, first_name, last_name, gender, l
     try {
         const {
             rows: [user],
-            //INSER SQL query
+            //INSERT SQL query
         } = await client.query(
-            // INSERT INTO table(column1, column2, etc)
-            //VALUES (var1, etc)
-            //RETURNING everything
             `
                 INSERT INTO users(username, password, first_name, last_name, gender, location, education, work, photos, about_me, song)
                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
@@ -164,6 +161,38 @@ const getUserMatches = async (user_id) => {
     }
 }
 
+const getUserMessages = async (user_id) => {
+    try {
+        const result = await client.query(`
+            SELECT
+                m.message_id,
+                m.message_content,
+                s.user_id AS sender_id,
+                s.first_name AS sender_first_name,
+                s.photos AS sender_photos,
+                r.user_id AS receiver_id,
+                r.first_name AS receiver_first_name,
+                r.photos AS receiver_photos,
+                m.thread_id
+            FROM
+                messages m
+            INNER JOIN
+                users s ON m.sender_id = s.user_id
+            INNER JOIN
+                users r ON m.receiver_id = r.user_id
+            WHERE
+                s.user_id = $1;
+        `, [user_id]);
+
+        const messages = result.rows; 
+
+        return messages;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 //POST - api/users/login - login 
 const loginUser = async (username, password) => {
     try {
@@ -222,4 +251,4 @@ const currentUser = async (user_id) => {
 
 
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername }
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, getUserMatches, loginUser, currentUser, getUserByUsername, getUserMessages }

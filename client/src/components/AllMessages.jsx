@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { fetchMessages } from "../API/messages";
+import { fetchUserMessages } from "../API";
 import { Link } from "react-router-dom";
 import DeleteMessage from "./DeleteMessage";
 import EditMessage from "./EditMessage";
 import ReplyMessage from "./ReplyMessage";
 
-export default function AllMessages() {
+export default function AllMessages({token, user_id}) {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
@@ -14,14 +14,14 @@ export default function AllMessages() {
   useEffect(() => {
     async function getAllMessages() {
       try {
-        const response = await fetchMessages();
+        const response = await fetchUserMessages(user_id);
         setMessages(response);
       } catch (error) {
         setError(error.message);
       }
     }
     getAllMessages();
-  }, []);
+  }, [token, user_id]);
 
   const messagesToDisplay = searchParam
     ? messages.filter((message) =>
@@ -39,14 +39,14 @@ export default function AllMessages() {
 
         {messagesToDisplay.map((message) => (
           <div key={message.message_id}>
-            <h4>{message.sender_first_name}</h4>
+            <h4>{message.receiver_first_name}</h4>
             <p>
               <Link to={`/messages/thread/${message.thread_id}`}>
-                <img src={message.sender_photos} id="user-profile-image" />
+                <img src={message.receiver_photos} id="user-profile-image" />
               </Link>
             </p>
             <p>
-              message: {message.sender_first_name}: {message.message_content}
+              <b>{message.sender_first_name}:</b> {message.message_content}
             </p>
             <DeleteMessage message_id={message.message_id} />
             <Link to={`/messages/edit/${message.message_id}`}>edit</Link>
@@ -58,7 +58,7 @@ export default function AllMessages() {
           ♡{" "}
           <input
             type="text"
-            placeholder="search"
+            placeholder="search by cutie"
             value={searchParam}
             onChange={(e) => setSearchParam(e.target.value.toLowerCase())}
           />

@@ -57,7 +57,7 @@ router.delete('/delete/:message_id', async (req, res, next) => {
 //PUT - api/messages/edit/:message_id - edit message
 router.put('/edit/:message_id', async (req, res, next) => {
     try {
-        const { sender_id, receiver_id, message_content } = req.body; // Get updated values from the request body
+        const { sender_id, receiver_id, message_content } = req.body;
         const updatedMessage = {
             sender_id,
             receiver_id,
@@ -66,7 +66,7 @@ router.put('/edit/:message_id', async (req, res, next) => {
            
         };
 
-        const message = await editMessage(req.params.message_id, updatedMessage); // Pass updatedMessage as the second argument
+        const message = await editMessage(req.params.message_id, updatedMessage); 
         res.send(message);
     } catch (error) {
         next(error);

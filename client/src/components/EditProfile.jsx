@@ -5,11 +5,11 @@ import { updateProfile } from "../API";
 import { fetchUserProfile } from "../API";
 
 
-export default function EditProfile() {
+export default function EditProfile({token, user_id}) {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const { user_id } = useParams();
+
     
     
     
@@ -19,7 +19,7 @@ export default function EditProfile() {
     useEffect(() => {
         async function fetchUserData() {
           try {
-            const userData = await fetchUserProfile(user_id);
+            const userData = await fetchUserProfile(user_id, token);
             console.log("Fetched user data:", userData);
             setUser(userData);
 
@@ -29,7 +29,7 @@ export default function EditProfile() {
         }
     
         fetchUserData();
-      }, [user_id]);
+      }, [user_id, token]);
 
 
     async function handleSubmit(e) {

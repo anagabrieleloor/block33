@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { fetchMatches } from "../API";
 import { Link } from "react-router-dom";
 
-export default function Matches() {
+export default function Matches({token, user_id}) {
   const [matches, setMatches] = useState([]);
   const [searchParam, setSearchParam] = useState("");
 
   useEffect(() => {
     async function getAllMatches() {
-      const response = await fetchMatches(1);
+      const response = await fetchMatches(user_id);
       console.log(response);
       setMatches(response);
     }
@@ -40,7 +40,7 @@ export default function Matches() {
     ♡{" "}
         <input
           type="text"
-          placeholder="search"
+          placeholder="search by cutie"
           value={searchParam}
           onChange={(e) => setSearchParam(e.target.value.toLowerCase())}
         />

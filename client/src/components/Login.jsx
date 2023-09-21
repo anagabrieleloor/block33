@@ -20,7 +20,7 @@ export default function Login({ token, setToken }) {
       setToken(response.user.token);
         console.log("ur in!!!!", response);
         // console.log("token maybe:", response.user.token)
-        navigate("/users/1");
+        navigate("/users/me/:user_id");
 
 
     } catch (err) {

@@ -153,6 +153,18 @@ export async function fetchMatches(user_id) {
     }
 }
 
+export async function fetchUserMessages(user_id) {
+  try {
+      const response = await fetch(`${BASE_URL}/users/${user_id}/messages`);
+      const result = await response.json();
+      console.log(result);
+      return result
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+}
+
 export async function updateProfile(user_id, updatedUserData) {
   try {
       const response = await fetch(`${BASE_URL}/users/edit_profile/${user_id}`, {

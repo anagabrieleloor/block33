@@ -17,13 +17,14 @@ export async function newMessage(sender_id, receiver_id, message_content) {
             `${BASE_URL}/messages/new`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     message: {
                         sender_id,
                         receiver_id,
-                        message_content
+                        message_content,
                         
                     },
                 })
@@ -36,6 +37,7 @@ export async function newMessage(sender_id, receiver_id, message_content) {
         return error;
     }
 }
+
 
 export async function deleteMessage(message_id) {
 	try {

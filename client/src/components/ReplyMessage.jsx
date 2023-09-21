@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 const BASE_URL = 'http://localhost:8080/api';
  
 
-export default function ReplyMessage({ message_id, thread_id }) {
-  const [sender_id, setSenderId] = useState("");
-  const [receiver_id, setReceiverId] = useState("");
+export default function ReplyMessage({ thread_id, token, sender_id, receiver_id }) {
+
+  // const [sender, setSender] = useState("");
+  // const [receiver, setReceiver] = useState("");
   const [message_content, setMessageContent] = useState("");
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ export default function ReplyMessage({ message_id, thread_id }) {
       receiver_id,
       message_content,
       thread_id,
+      
     });
 
     try {
@@ -26,17 +28,21 @@ export default function ReplyMessage({ message_id, thread_id }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: requestBody,
+        
       });
 
  
       if (response.ok) {
         const data = await response.json();
         console.log("message sent ayooo", data);
+        console.log("Thread ID in ReplyMessage:", thread_id);
 
        
-        navigate(`/messages/${thread_id}`);
+        // navigate(`/messages/thread/${thread_id}`);
+        window.location.reload()
       } else {
         console.error("message send go oopsie:", response.statusText);
 
