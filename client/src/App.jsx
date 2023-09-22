@@ -47,7 +47,7 @@ function App() {
       <Route path="/messages/new" element={<ReplyMessage token={token} user_id={user_id} sender_id={user_id} />} />
       <Route path="/messages/delete/:message_id" element={<DeleteMessage />} />
       <Route path="/messages/edit/:message_id" element={<EditMessage />} />
-      <Route path="/messages/thread/:thread_id" element={<MessageThread token={token} />} />
+      <Route path="/messages/thread/:thread_id" element={<MessageThread token={token} user_id={user_id} />} />
       <Route path="/users/signout" element={<SignOut token={token} setToken={setToken} />} />
       <Route path="users/:user_id" element={<SingleProfile token={token} user_id={user_id} sender_id={user_id} />} />
       

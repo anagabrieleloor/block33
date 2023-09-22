@@ -6,7 +6,7 @@ import EditMessage from "./EditMessage";
 import NewMessage from "./NewMessage";
 import ReplyMessage from "./ReplyMessage";
 
-export default function MessageThread({token}) {
+export default function MessageThread({token, user_id}) {
   const { thread_id } = useParams();
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
@@ -88,7 +88,7 @@ export default function MessageThread({token}) {
       </div>
       <ReplyMessage 
       thread_id={thread_id} 
-      sender_id={sender_id} 
+      sender_id={user_id} 
       receiver_id={receiver_id} 
       token={token} />
 

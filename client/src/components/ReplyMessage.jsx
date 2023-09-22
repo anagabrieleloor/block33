@@ -38,7 +38,7 @@ export default function ReplyMessage({ thread_id, token, sender_id, receiver_id 
       if (response.ok) {
         const data = await response.json();
         console.log("message sent ayooo", data);
-        console.log("Thread ID in ReplyMessage:", thread_id);
+        console.log("thread_id from ReplyMessage:", thread_id);
 
        
         // navigate(`/messages/thread/${thread_id}`);
