@@ -3,7 +3,17 @@
 
 //users
 const users = [
-    { first_name: 'ani', last_name: 'loor', username: 'aniloo', password: 'secret', gender: 'female', location: 'brooklyn', education: 'art school burnout', work: 'baddest swe of all time', photos: 'https://i.ibb.co/TRSVSbD/371977734-325418556543852-2243856488041879969-n.jpg', about_me: 'just a baby', song: 'https://open.spotify.com/track/4Iey0xwi0kJjI4hkZRj3HE?si=95623e2c659b4c63' },
+    { first_name: 'ani', 
+    last_name: 'loor', 
+    username: 'aniloo', 
+    password: 'secret93', 
+    gender: 'female', 
+    location: 'brooklyn', 
+    education: 'art school burnout', 
+    work: 'baddest swe of all time', 
+    photos: 'https://i.ibb.co/TRSVSbD/371977734-325418556543852-2243856488041879969-n.jpg', 
+    about_me: 'just a baby', 
+    song: 'https://open.spotify.com/track/4Iey0xwi0kJjI4hkZRj3HE?si=95623e2c659b4c63' },
     { first_name: 'hannah', last_name: 'b', username: 'hannahb', password: 'nocap', gender: 'female', location: 'los angeles', education: 'smfa', work: 'developer', photos: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Girl_in_chibi_style.svg/1200px-Girl_in_chibi_style.svg.png', about_me: '<3333', song: 'https://open.spotify.com/track/4bR87SmQTiNcS5gDuaF9Yl?si=18d3466978014809' },
     { first_name: 'yuji', last_name: 'choi', username: 'yujichoi', password: 'iloveani', gender: 'male', location: 'queens', education: 'university at buffalo', work: 'dj extraordinare', photos: 'https://e0.pxfuel.com/wallpapers/215/40/desktop-wallpaper-anime-chibi-art-for-android-chibi-boy-thumbnail.jpg', about_me: 'i actually am already in love with ani, sorry', song: 'https://open.spotify.com/track/1yw28y3kv8uS7ENaZkbUFt?si=e0d73cce5aa94968' },
     { first_name: 'tim', last_name: 'lee', username: 'timlee', password: 'ugh', gender: 'male', location: 'brooklyn', education: 'nyu', work: 'professional know it all', photos: 'https://pbs.twimg.com/media/EYttqYIUcAAIrxX.jpg', about_me: 'i am the actual worst', song: 'https://open.spotify.com/track/4aVEsdnZrP2borAsVin48m?si=208d651ed93e4d71' },

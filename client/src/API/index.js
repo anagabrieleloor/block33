@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8088/api';
 
 export async function fetchUsers() {
     try {
@@ -70,7 +70,7 @@ export async function logOut() {
 
     });
     const result = await response.json();
-    console.log("bye for now", result);
+    console.log("You have logged out", result);
     return result
   } catch (error) {
     console.error(error)

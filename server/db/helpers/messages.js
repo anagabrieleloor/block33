@@ -2,34 +2,48 @@ const client = require('../client')
 
 const createMessage = async ({ sender_id, receiver_id, message_content, thread_id }) => {
     try {
-        let newThreadId = thread_id; 
-
-        if (!newThreadId) {
-            // create new thread_id when not provided
-            const {
-                rows: [message],
-            } = await client.query('INSERT INTO messages DEFAULT VALUES RETURNING thread_id;');
-            newThreadId = message.thread_id;
-        } else {
-            newThreadId = thread_id; // use the exsisting thread_id
-        }
-
+      if (!thread_id) {
+        // Checks if a thread already exists between sender and receiver
         const {
+          rows: [existingThread],
+        } = await client.query(
+          `
+          SELECT thread_id
+          FROM messages
+          WHERE (sender_id = $1 AND receiver_id = $2) 
+          OR (sender_id = $2 AND receiver_id = $1)
+          `,
+          [sender_id, receiver_id]
+        );
+  
+        if (existingThread) {
+          thread_id = existingThread.thread_id;
+        } else {
+          // If no existing thread, creates new thread_id
+          const {
             rows: [message],
-        } = await client.query (
-            `
-            INSERT INTO messages(sender_id, receiver_id, message_content, sender_username, receiver_username, thread_id)
-            VALUES($1, $2, $3, (SELECT username FROM users WHERE user_id = $1), (SELECT username FROM users WHERE user_id = $2), $4)
-            RETURNING *;
-            `,
-            [sender_id, receiver_id, message_content, newThreadId]
-        )
-        
-        return message
+          } = await client.query('INSERT INTO messages DEFAULT VALUES RETURNING thread_id;');
+          thread_id = message.thread_id;
+        }
+      }
+  
+      // Photo autopopulate with new message
+      const {
+        rows: [messageWithPhoto],
+      } = await client.query(
+        `
+        INSERT INTO messages(sender_id, receiver_id, message_content, thread_id)
+        VALUES($1, $2, $3, $4)
+        RETURNING *, (SELECT photos FROM users WHERE user_id = $1) AS sender_photo;
+        `,
+        [sender_id, receiver_id, message_content, thread_id]
+      );
+  
+      return messageWithPhoto;
     } catch (error) {
-        throw error
+      throw error;
     }
-}
+  };
 
 
 

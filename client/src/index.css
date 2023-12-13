@@ -3,11 +3,15 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  
   color: rgba(255, 255, 255, 0.87);
-  background: rgb(34,40,49);
-  background: radial-gradient(circle, rgba(34,40,49,1) 80%, rgba(235,25,110,1) 100%);
-
+  background: rgb(0, 0, 0);
+  /* background: radial-gradient(circle, rgba(34,40,49,1) 80%, rgba(235,25,110,1) 100%); */
+  /* background-image: url(./carino-bg.png);
+  background-size: cover;
+   */
+  
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -68,3 +72,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

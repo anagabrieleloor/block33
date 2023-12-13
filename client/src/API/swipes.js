@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8088/api';
 
 export async function createSwipe(user1, user2, is_like, is_pass) {
     try {

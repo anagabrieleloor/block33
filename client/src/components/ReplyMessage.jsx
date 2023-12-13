@@ -1,75 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { createMessage } from "../API/messages";
+
 const BASE_URL = 'http://localhost:8080/api';
- 
 
-export default function ReplyMessage({ thread_id, token, sender_id, receiver_id }) {
-
-  // const [sender, setSender] = useState("");
-  // const [receiver, setReceiver] = useState("");
+export default function ReplyMessage({ thread_id, sender_id, receiver_id, messages }) {
   const [message_content, setMessageContent] = useState("");
   const navigate = useNavigate();
 
-  async function createMessage(event) {
-    event.preventDefault();
+  const messagesRef = useRef(null);
+  const inputRef = useRef(null);
 
-  
-    const requestBody = JSON.stringify({
-      sender_id,
-      receiver_id,
-      message_content,
-      thread_id,
-      
-    });
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      
-      const response = await fetch(`${BASE_URL}/messages/new`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: requestBody,
-        
-      });
+      let data;
 
- 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("message sent ayooo", data);
-        console.log("thread_id from ReplyMessage:", thread_id);
-
-       
-        // navigate(`/messages/thread/${thread_id}`);
-        window.location.reload()
+      if (thread_id) {
+        data = await createMessage(sender_id, receiver_id, message_content, thread_id);
       } else {
-        console.error("message send go oopsie:", response.statusText);
-
+        data = await createMessage(sender_id, receiver_id, message_content);
       }
-    } catch (error) {
-      console.error("Error:", error);
 
-      
+      console.log("Message sent:", data);
+
+
+      setMessageContent("");
+    } catch (error) {
+      console.error('error:', error);
     }
+  };
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat container to show the new message
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    // Focus on the input field after submitting a message
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [message_content]);
+
+  function refreshPage() {
+    window.location.reload(false);
   }
 
   return (
     <div>
-      <form onSubmit={createMessage}>
-        {/* <label>whats up?</label> */}
+      <form onSubmit={handleSubmit}>
+        <div ref={messagesRef} style={{ maxHeight: "200px", overflowY: "auto" }}>
+          
+        </div>
         <input
           type="text"
           value={message_content}
           placeholder="whats up?"
           onChange={(e) => setMessageContent(e.target.value)}
+          ref={inputRef}
         />
-    <button className="btn draw-border" type="submit">
-            reply
-          </button>
-        <div>
-          
-        </div>
+        <button className="btn draw-border" type="submit" onClick={refreshPage}>
+          reply
+        </button>
       </form>
     </div>
   );

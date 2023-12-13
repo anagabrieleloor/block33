@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const { COOKIE_SECRET } = require('./secrets');
 const { authRequired } = require('./api/utils');
 const jwt = require('jsonwebtoken');
-const PORT = 8080;
+const PORT = 8088;
 
 const client =require('./db/client');
 //connect to client

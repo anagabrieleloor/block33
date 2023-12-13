@@ -2,65 +2,44 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../API";
 
-
-
-export default function Login({ token, setToken }) {
+export default function Login({ token, setToken, displayLogin, setDisplayLogin, user_id }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  
-
 
   async function loginUser(event) {
     event.preventDefault();
     try {
       const response = await login(username, password);
-      
       setToken(response.user.token);
-        console.log("ur in!!!!", response);
-        // console.log("token maybe:", response.user.token)
-        navigate("/users/me/:user_id");
-
-
+      console.log("You have successfully logged in", response);
+      navigate(`/users/me/user_id`);
     } catch (err) {
-      console.error("try again bb", err);
+      console.error("Error logging in", err);
     }
   }
-
-
-  
+  const handleCloseClick = () => {
+    setDisplayLogin(false);
+  };
 
   return (
-    <div className="login-container">
-    <div className="login-card">
-      <form onSubmit={loginUser}>
-        <h3>log in</h3>
-        <p>username:</p>
-                <input
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <br />
-                <p>password:</p>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <br />
-        <div>
+    <div className={`login-container ${displayLogin ? "show" : "hide"}`}>
+      <div className="login-card">
+      <button data-dismiss="modal" className="close" onClick={handleCloseClick}>&times;</button>
+      <h3>Log in</h3>
+        <form onSubmit={loginUser}>
           
-        </div>
-        <button className="btn draw-border" type="submit">Submit</button>
-      </form>
-      <div>
-       
-        {/* <Authenticate token={token} setToken={setToken}/> */}
+          <p>Username:</p>
+          <input value={username} onChange={(e) => setUsername(e.target.value)} />
+          <br />
+          <p>Password:</p>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <br />
+          <button className="btn draw-border" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
-      
-    </div>
-    <Link to ="/users/signup">new? sign up</Link>
     </div>
   );
 }

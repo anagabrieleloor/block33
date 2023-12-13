@@ -19,14 +19,18 @@ import SingleProfile from "./components/SingleProfile";
 import MessageThread from "./components/MessageThread";
 import SignOut from "./components/SignOut";
 import ReplyMessage from "./components/ReplyMessage";
+import bg from "./bg.png";
 
 
 function App() {
   const [token, setToken] = useState(null);
   const [user_id, setUserId ] =useState(null);
+
+  
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setUserId(localStorage.getItem('user_id'));
+    
   
 }, [])
 
@@ -35,11 +39,12 @@ function App() {
       <Navbar token={token} />
       <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/users/login" element={<Login token={token} user_id={user_id}/>} />
       <Route path="/users" element={<AllUserProfiles />} />
       <Route path="/users/:user_id/messages" element={<AllMessages token={token} user_id={user_id} />} />
       <Route path="/users/me/:user_id" element={<MyProfile token={token} user_id={user_id} />} />
       {/* <Route path="/users/:user_id" element={<SingleProfile />} /> */}
-      <Route path="/swipes" element={<Swipe token={token} user_id={user_id} />} />
+      <Route path="/swipes" element={<Swipe token={token} user1={user_id} />} />
       <Route path='/users/signup' element={<Register setToken={setToken} />} />
       <Route path='/users/:user_id/matches' element={<Matches token={token} user_id={user_id} />} />
       <Route path='/users/edit_profile/:user_id' element={<EditProfile token={token} user_id={user_id} />} />
@@ -60,19 +65,43 @@ function App() {
 
 function Home() {
   const [token, setToken] = useState(null);
+  const [displayLogin, setDisplayLogin] = useState(false);
+
+  const handleLoginClick = () => {
+    setDisplayLogin(true);
+  };
+  
   useEffect(() => {
     setToken(window.localStorage.getItem('token'));
     
 }, [])
   return (
-    <div id="home">
-      <h2>&hearts; welcome &hearts;</h2>
-      {/* <Register /> */}
-      <Login token={token} setToken={setToken} />
+    // <div id="home">
+    //   <h2>&hearts; welcome &hearts;</h2>
+    //   <img src={bg}></img>
+    //   {/* <Register /> */}
+    //   <Login token={token} setToken={setToken} />
       
-      {/* <Register /> */}
+    //   {/* <Register /> */}
       
-    </div>
+    // </div>
+ <>
+    <div className="homepage-container">
+      <div className="image-container">
+        <img src={bg} alt="Homepage Image" />
+      </div>
+      <div className="button-container">
+          <button className="login-button" onClick={handleLoginClick}>
+            Login
+          </button>
+          <Link to="/users/signup">
+            <button className="signup-button">Sign Up</button>
+          </Link>
+        </div>
+      </div>
+
+      {displayLogin && <Login setToken={setToken} displayLogin={displayLogin} setDisplayLogin={setDisplayLogin}/>}
+    </>
   )
 }
 

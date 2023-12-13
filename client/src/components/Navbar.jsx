@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function Navbar({ token, setToken }) {
     return (
         <div id="navbar">
-            <h1>⤜♡→cariño</h1>
+            <h1><b><span>⤜♡→</span><span>car</span>iñ<span>o</span></b></h1>
             <div id="navbar-links">
                 <Link to="/">♡ home</Link>
                 

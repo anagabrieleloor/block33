@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchUsers } from "../API";
 import { createSwipe } from '../API/swipes';
 
-export default function Swipe({user_id, token}) {
+export default function Swipe({user1, token}) {
   const [users, setUsers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState(null);
@@ -31,9 +31,9 @@ export default function Swipe({user_id, token}) {
   
   async function handleSwipe(direction) {
     if (direction === 'like') {
-        await createSwipe(user_id, currentUser.user_id, true, false);
+        await createSwipe(user1, currentUser, true, false);
     } else if (direction === 'pass') {
-        await createSwipe(user_id, currentUser.user_id, false, true);
+        await createSwipe(user1, currentUser, false, true);
     }
 
     // Handle updating the UI or moving to the next profile here

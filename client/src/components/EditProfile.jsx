@@ -5,7 +5,7 @@ import { updateProfile } from "../API";
 import { fetchUserProfile } from "../API";
 
 
-export default function EditProfile({token, user_id}) {
+export default function EditProfile({token, user_id, setIsEditFormVisible}) {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -60,12 +60,18 @@ export default function EditProfile({token, user_id}) {
         }
     }
 
-
+    const handleCloseClick = () => {
+        setIsEditFormVisible(false);
+      };
+    
     return (
         <div className="container">
         <div className="update-card">
+        <button data-dismiss="modal" className="close" onClick={handleCloseClick}>&times;</button> 
         {user && (
+            
         <form onSubmit={handleSubmit}>
+            
             {error && <p>{error}</p>}
             
           <>

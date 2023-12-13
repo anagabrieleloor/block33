@@ -16,6 +16,7 @@ export default function MessageThread({token, user_id}) {
 
 
 
+
   useEffect(() => {
     async function getMessageThread() {
       try {
@@ -53,7 +54,12 @@ export default function MessageThread({token, user_id}) {
   if (messages.length === 0) {
     return <p>No messages found.</p>;
   }
+
+  const lastMessage = messages[messages.length - 1];
+
   console.log("Thread ID in MessageThread:", thread_id);
+
+  
 
   return (
     <div className="thread-card-container">
@@ -86,12 +92,13 @@ export default function MessageThread({token, user_id}) {
         ))}
 
       </div>
+      {lastMessage && (
       <ReplyMessage 
       thread_id={thread_id} 
       sender_id={user_id} 
       receiver_id={receiver_id} 
       token={token} />
-
+      )}
     </div>
   );
 }

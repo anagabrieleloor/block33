@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8088/api';
 
 export async function fetchMessages() {
     try {
@@ -38,6 +38,35 @@ export async function newMessage(sender_id, receiver_id, message_content) {
     }
 }
 
+export async function createMessage(
+    sender_id,
+    receiver_id,
+    message_content,
+    thread_id,
+    created_at
+  ) {
+    try {
+      const resp = await fetch(`${BASE_URL}/messages/new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sender_id,
+          receiver_id,
+          message_content,
+          thread_id,
+          created_at,
+        }),
+      });
+      const json = await resp.json();
+      console.log("Message sent:", json);
+      return json;
+    } catch (error) {
+      console.error("Error sending message:", error);
+      return error;
+    }
+  }
 
 export async function deleteMessage(message_id) {
 	try {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { newMessage } from "../API/messages";
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8088/api';
 
 export default function NewMessage({token, sender_id, receiver_id}) {
     // const [sender_id, setSenderId] = useState(null);
@@ -35,7 +35,7 @@ async function createMessage(event) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('message sent ayooo', data);
+      console.log('Message sent', data);
 
 
  
@@ -44,7 +44,7 @@ async function createMessage(event) {
 
       navigate(`/messages/thread/${threadId}`);
     } else {
-      console.error('message send go oopsie:', response.statusText);
+      console.error('Error sending message:', response.statusText);
 
     
     }

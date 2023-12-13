@@ -55,12 +55,12 @@ router.post('/signup', async (req, res, next) => {
             httpOnly: true,
             signed: true
         })
-        console.log('token??:', token)
+        console.log('Sign up token:', token)
         delete user.password
         // console.log(res)
 
 
-        res.send({message: 'yayy welcome', user});
+        res.send({message: 'Sign up successful, welcome', user});
     } catch (error) {
         next(error);
     }
@@ -123,7 +123,7 @@ router.post('/login', async (req, res, next) => {
         const { username, password } = req.body 
         
         const user = await getUserByUsername(username)     
-        console.log('yayyy ur logged in', user )
+        console.log('You have successfully logged in', user )
 
         const validPassword = await bcrypt.compare(password, user.password)
 

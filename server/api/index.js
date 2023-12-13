@@ -11,7 +11,6 @@ router.get('/health', (req, res, next) => {
 //ROUTER: /api/users
 router.use('/users', require('./users'));
 
-
 //ROUTER: /api/messages
 router.use('/messages', require('./messages'));
 

@@ -35,11 +35,15 @@ export default function UserProfile({token, user_id}) {
         }
       } catch (err) {
         console.error(err);
-        setError("An error occurred while fetching user profile");
+        setError("♡");
       }
     }
     getSingleUser();
   }, [user_id, token]);
+
+  const handleCloseClick = () => {
+    setIsEditFormVisible(false);
+  };
 
   return (
     <div className="container">
@@ -52,7 +56,8 @@ export default function UserProfile({token, user_id}) {
       {error && <p>{error}</p>}
       {user && (
         <div className="card">
-          {console.log('profile: ', user.first_name)}
+          
+          {console.log('Profile: ', user.first_name)}
                   <img src={user.photos} alt={`${user.first_name}'s Profile`} id="user-profile-image" />
         <p className="card__name">{user.first_name}</p>
         <div className="grid-container">
@@ -74,7 +79,7 @@ export default function UserProfile({token, user_id}) {
 
         {isEditFormVisible && (
   <div className={`form-popup ${isEditFormVisible ? 'visible' : ''}`} id="myForm">
-    {user ? <EditProfile user_id={user_id} token={token} /> : null}
+    {user ? <EditProfile user_id={user_id} token={token} setIsEditFormVisible={setIsEditFormVisible}/> : null}
   </div>
 )}
         <button className="btn draw-border" onClick={openForm}>edit</button>
