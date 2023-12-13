@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMessage } from "../API/messages";
 
-const BASE_URL = 'http://localhost:8080/api';
+
 
 export default function ReplyMessage({ thread_id, sender_id, receiver_id, messages }) {
   const [message_content, setMessageContent] = useState("");
