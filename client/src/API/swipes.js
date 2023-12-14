@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://localhost:8088/api';
-const BASE_URL = 'https://carino-pvoo.onrender.com/api';
+const BASE_URL = `https://carino.onrender.com/api`;
 
 export async function createSwipe(user1, user2, is_like, is_pass) {
     try {
