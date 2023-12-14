@@ -35,7 +35,7 @@ const createTables = async () => {
             password text,
             first_name varchar(32),
             last_name varchar(32),
-            gender gender_enum,
+            gender varchar,
             location varchar(32),
             education varchar(255),
             work varchar(255),
