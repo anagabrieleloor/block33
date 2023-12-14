@@ -5,7 +5,7 @@ const { Client } = require('pg')
 const carino = 'carino'
 // const client = new Client(`postgres://localhost:5432/${carino}`)
 
-const client = new Client((`postgres://carino_user:NMpH6AwHq0rzkqBiV0zdUcxEQKQo9tiH@dpg-clsuvripmc4c73dtfn5g-a/carino`));
+const client = new Client((`postgres://carino_bj0u_user:RC87rlGL8UcNKPfmK7mcskjz7Lz1NphR@dpg-cltgh5q1hbls73eeop0g-a/carino_bj0u`));
 
 
 //esport for use in other files
