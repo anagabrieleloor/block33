@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://localhost:8088/api';
-const BASE_URL = 'https://carino.onrender.com';
+const BASE_URL = 'https://carino.onrender.com/api';
 
 export async function fetchUsers() {
     try {
