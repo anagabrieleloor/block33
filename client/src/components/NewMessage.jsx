@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { newMessage } from "../API/messages";
 // const BASE_URL = 'http://localhost:8088/api';
-const BASE_URL = 'https://carino.onrender.com';
+const BASE_URL = 'https://carino.onrender.com/api';
 
 export default function NewMessage({token, sender_id, receiver_id}) {
     // const [sender_id, setSenderId] = useState(null);
